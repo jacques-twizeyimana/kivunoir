@@ -1,5 +1,6 @@
 ---
-import PhotoSlot from './PhotoSlot.astro';
+import type { Photo } from '../../data/photos';
+import Cover from './Cover.astro';
 
 interface Props {
   href: string;
@@ -7,14 +8,19 @@ interface Props {
   title: string;
   text: string;
   cta: string;
-  photo: string;
+  image: Photo;
 }
 
-const { href, eyebrow, title, text, cta, photo } = Astro.props;
+const { href, eyebrow, title, text, cta, image } = Astro.props;
 ---
 
 <a href={href} class="group relative block aspect-4/5 overflow-hidden bg-noir-950 text-paper">
-  <PhotoSlot label={photo} labelTop class="absolute inset-0 transition-transform duration-600 ease-out group-hover:scale-103" />
+  <Cover
+    src={image.src}
+    alt=""
+    sizes="(min-width: 600px) 50vw, 100vw"
+    class="transition-transform duration-600 ease-out group-hover:scale-103"
+  />
   <span
     class="absolute inset-0 bg-linear-to-t from-noir-950/82 via-noir-950/35 via-45% to-noir-950/0 to-70%"
     aria-hidden="true"></span>

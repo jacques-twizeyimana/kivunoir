@@ -4,7 +4,7 @@ interface Props {
   label: string;
   name?: string;
   type?: 'text' | 'email' | 'tel' | 'date' | 'select' | 'textarea';
-  options?: string[];
+  options?: (string | { value: string; label: string })[];
   required?: boolean;
   autocomplete?: string;
   placeholder?: string;
@@ -34,10 +34,10 @@ const input =
   <label for={id} class="text-eyebrow text-ink-muted uppercase">{label}</label>
   {
     type === 'select' ? (
-      <select id={id} name={name} class:list={[input, 'cursor-pointer appearance-none [&>option]:text-noir-950']}>
-        {options.map((option) => (
-          <option>{option}</option>
-        ))}
+      <select id={id} name={name} required={required} class:list={[input, 'cursor-pointer appearance-none [&>option]:text-noir-950']}>
+        {options.map((option) =>
+          typeof option === 'string' ? <option>{option}</option> : <option value={option.value}>{option.label}</option>,
+        )}
       </select>
     ) : type === 'textarea' ? (
       <textarea

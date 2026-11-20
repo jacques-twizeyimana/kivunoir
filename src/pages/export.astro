@@ -10,12 +10,15 @@ import FormGrid from '../components/ui/FormGrid.astro';
 import Hero from '../components/ui/Hero.astro';
 import HeroActions from '../components/ui/HeroActions.astro';
 import Notice from '../components/ui/Notice.astro';
-import PhotoSlot from '../components/ui/PhotoSlot.astro';
 import Rows from '../components/ui/Rows.astro';
 import Section from '../components/ui/Section.astro';
 import SectionHead from '../components/ui/SectionHead.astro';
 import Steps from '../components/ui/Steps.astro';
+import ToggleButton from '../components/ui/ToggleButton.astro';
 import { contact } from '../data/site';
+import Cover from '../components/ui/Cover.astro';
+import { photos } from '../data/photos';
+import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const services = [
@@ -39,9 +42,24 @@ const lots = [
 ];
 
 const certifications = [
-  { name: 'HACCP', text: 'Hazards identified and controlled at every stage of production.' },
-  { name: 'Rwanda FDA', text: 'Compliance with national food safety regulation.' },
-  { name: 'S-Mark', text: 'Rwanda Standards Board certification.' },
+  {
+    scope: 'International',
+    name: 'HACCP',
+    logo: photos.haccp,
+    text: 'Hazard Analysis and Critical Control Points: a food safety system that identifies and controls hazards at every stage of production.',
+  },
+  {
+    scope: 'Rwanda',
+    name: 'Rwanda FDA',
+    logo: photos.rwandaFda,
+    text: "Compliant with the Rwanda Food and Drugs Authority's food safety regulations.",
+  },
+  {
+    scope: 'Rwanda',
+    name: 'S-Mark',
+    logo: photos.rsb,
+    text: "The Rwanda Standards Board's mark of quality, certifying that our products meet national standards.",
+  },
 ];
 
 const interests = [
@@ -73,8 +91,31 @@ const td = 'border-b border-line px-4 py-5';
       <Button variant="roast" href="#inquiry">Request samples</Button>
       <Button variant="secondary" href="#services">Our services</Button>
     </HeroActions>
-    <PhotoSlot slot="media" label="Washing station / drying beds (caferwa.coffee hero, Cyebumba)" class="absolute inset-0" />
+    <Cover slot="media" src={photos.handSorting.src} alt={photos.handSorting.alt} loading="eager" />
   </Hero>
+
+  <!-- Certifications -->
+  <Section raised id="certifications">
+    <SectionHead eyebrow="Certifications" title="Certified for food safety, at home and abroad" size="heading">
+      <p class="text-ink-muted">
+        Our roasting and packing meet international and Rwandan food safety standards. Copies of our certificates are
+        available to trade partners on request.
+      </p>
+      <Button slot="action" variant="secondary" href="#inquiry">Request certificates</Button>
+    </SectionHead>
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
+      {
+        certifications.map((mark) => (
+          <article class="flex flex-col gap-5 bg-surface p-8 ring-1 ring-line ring-inset">
+            <Image src={mark.logo.src} alt={mark.logo.alt} width={112} height={112} densities={[1, 2]} class="size-28 object-contain" />
+            <Eyebrow roast>{mark.scope}</Eyebrow>
+            <p class="text-mark">{mark.name}</p>
+            <p class="text-small text-ink-muted">{mark.text}</p>
+          </article>
+        ))
+      }
+    </div>
+  </Section>
 
   <Section space="loose">
     <div class="grid grid-cols-1 gap-12 sm:grid-cols-2">
@@ -170,21 +211,6 @@ const td = 'border-b border-line px-4 py-5';
     <p class="mt-4 text-caption text-ink-muted">Screen 15+ single estate. Cupping notes and samples on request.</p>
   </Section>
 
-  <!-- Certifications -->
-  <Section raised>
-    <SectionHead eyebrow="Certified" title="Food safety you can audit" size="heading" />
-    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
-      {
-        certifications.map((mark) => (
-          <div class="flex flex-col gap-3 p-8 ring-1 ring-line ring-inset">
-            <p class="text-mark">{mark.name}</p>
-            <p class="text-small text-ink-muted">{mark.text}</p>
-          </div>
-        ))
-      }
-    </div>
-  </Section>
-
   <!-- Inquiry -->
   <Section id="inquiry">
     <div class="flex flex-wrap items-start gap-16">
@@ -207,14 +233,9 @@ const td = 'border-b border-line px-4 py-5';
           <div class="flex flex-wrap gap-2">
             {
               interests.map((interest) => (
-                <button
-                  type="button"
-                  data-interest={interest.id}
-                  aria-pressed={interest.pressed ? 'true' : 'false'}
-                  class="inline-flex h-10 cursor-pointer items-center border-2 border-line-strong bg-transparent px-6 text-button text-ink uppercase transition-colors duration-200 hover:bg-surface-inverse hover:text-ink-inverse aria-pressed:border-surface-inverse aria-pressed:bg-surface-inverse aria-pressed:text-ink-inverse"
-                >
+                <ToggleButton pressed={interest.pressed} data-interest={interest.id}>
                   {interest.label}
-                </button>
+                </ToggleButton>
               ))
             }
           </div>

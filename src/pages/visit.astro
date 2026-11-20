@@ -1,19 +1,23 @@
 ---
-import lattePour from '../assets/images/latte-pour.jpg';
 import Button from '../components/ui/Button.astro';
 import Cover from '../components/ui/Cover.astro';
 import Eyebrow from '../components/ui/Eyebrow.astro';
 import Field from '../components/ui/Field.astro';
 import FormGrid from '../components/ui/FormGrid.astro';
+import GuestStepper from '../components/ui/GuestStepper.astro';
 import Notice from '../components/ui/Notice.astro';
 import PageHero from '../components/ui/PageHero.astro';
 import Section from '../components/ui/Section.astro';
+import { photos, type Photo } from '../data/photos';
 import { contact, experiences } from '../data/site';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const [initial] = experiences;
-const stepperButton =
-  'inline-flex size-11 cursor-pointer items-center justify-center border-2 border-line-strong text-title-sm text-ink transition-colors hover:bg-surface-inverse hover:text-ink-inverse';
+const summaryPhotos: Record<string, Photo> = {
+  buliza: photos.cherriesSorting,
+  cyebumba: photos.cyebumba,
+  tasting: photos.tastingCupping,
+};
 ---
 
 <BaseLayout
@@ -64,14 +68,7 @@ const stepperButton =
           <legend class="mb-6 text-eyebrow text-ink-muted uppercase">2 · Date and party</legend>
           <FormGrid>
             <Field id="v-date" name="date" label="Preferred date" type="date" required />
-            <div class="flex flex-col gap-2">
-              <span id="v-guests-label" class="text-eyebrow text-ink-muted uppercase">Guests</span>
-              <div role="group" aria-labelledby="v-guests-label" class="flex h-12 items-center gap-4 border-b border-line-strong">
-                <button type="button" class={stepperButton} aria-label="Fewer guests" data-guests-step="-1">−</button>
-                <output data-guests aria-live="polite" class="min-w-8 text-center text-body-lg">2</output>
-                <button type="button" class={stepperButton} aria-label="More guests" data-guests-step="1">+</button>
-              </div>
-            </div>
+            <GuestStepper id="v-guests" />
           </FormGrid>
         </fieldset>
 
@@ -109,13 +106,17 @@ const stepperButton =
       <!-- Summary -->
       <aside data-theme="noir" aria-label="Booking summary" class="flex min-w-0 flex-[1_1_360px] flex-col gap-4 bg-surface-raised p-8">
         <div class="relative -mx-8 -mt-8 mb-2 aspect-4/3 overflow-hidden bg-noir-900">
-          <div data-summary-media="tasting" hidden>
-            <Cover src={lattePour} alt="A latte being poured at a Kivu Noir tasting" sizes="(min-width: 900px) 33vw, 100vw" />
-          </div>
-          <div data-summary-media="estate" class="absolute inset-0 text-stone-300">
-            <span class="absolute top-1/2 left-1/2 size-14 -translate-1/2 border-2 border-current opacity-35" aria-hidden="true"></span>
-            <p class="absolute inset-x-6 bottom-6 text-caption">Photo · <span data-summary="photo">{initial.photo}</span></p>
-          </div>
+          {
+            experiences.map((experience) => (
+              <div data-summary-media={experience.id} hidden={experience.id !== initial.id}>
+                <Cover
+                  src={summaryPhotos[experience.id].src}
+                  alt={summaryPhotos[experience.id].alt}
+                  sizes="(min-width: 900px) 33vw, 100vw"
+                />
+              </div>
+            ))
+          }
         </div>
         <Eyebrow roast>Your visit</Eyebrow>
         <p class="text-title" data-summary="title">{initial.title}</p>
@@ -181,10 +182,8 @@ const stepperButton =
     setText('where', chosen.where);
     setText('price', chosen.price);
     setText('note', chosen.note);
-    setText('photo', chosen.photo);
-    const isTasting = chosen.id === 'tasting';
     document.querySelectorAll<HTMLElement>('[data-summary-media]').forEach((el) => {
-      el.hidden = (el.dataset.summaryMedia === 'tasting') !== isTasting;
+      el.hidden = el.dataset.summaryMedia !== chosen.id;
     });
     if (notice) notice.hidden = true;
   };

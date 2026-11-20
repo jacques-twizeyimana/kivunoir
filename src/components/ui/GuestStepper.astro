@@ -1,0 +1,24 @@
+---
+/**
+ * Guest count stepper. Page scripts listen for clicks on [data-guests-step]
+ * and write the count into every [data-guests] element.
+ */
+interface Props {
+  id: string;
+  label?: string;
+  value?: number;
+}
+
+const { id, label = 'Guests', value = 2 } = Astro.props;
+const button =
+  'inline-flex size-11 shrink-0 cursor-pointer items-center justify-center border-2 border-line-strong text-title-sm text-ink transition-colors hover:bg-surface-inverse hover:text-ink-inverse';
+---
+
+<div class="flex flex-col gap-2">
+  <span id={`${id}-label`} class="text-eyebrow text-ink-muted uppercase">{label}</span>
+  <div role="group" aria-labelledby={`${id}-label`} class="flex h-12 items-center gap-4 border-b border-line-strong">
+    <button type="button" class={button} aria-label="Fewer guests" data-guests-step="-1">−</button>
+    <output data-guests aria-live="polite" class="min-w-8 text-center text-body-lg">{value}</output>
+    <button type="button" class={button} aria-label="More guests" data-guests-step="1">+</button>
+  </div>
+</div>

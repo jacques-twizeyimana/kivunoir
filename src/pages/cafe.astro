@@ -1,26 +1,36 @@
 ---
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
 import cafeInterior from '../assets/images/cafe-interior.jpg';
-import lattePour from '../assets/images/latte-pour.jpg';
 import Breadcrumbs from '../components/ui/Breadcrumbs.astro';
 import Button from '../components/ui/Button.astro';
+import Card from '../components/ui/Card.astro';
+import CardTitle from '../components/ui/CardTitle.astro';
 import Cover from '../components/ui/Cover.astro';
 import Display from '../components/ui/Display.astro';
 import Eyebrow from '../components/ui/Eyebrow.astro';
+import Field from '../components/ui/Field.astro';
+import FormGrid from '../components/ui/FormGrid.astro';
+import GuestStepper from '../components/ui/GuestStepper.astro';
 import Hero from '../components/ui/Hero.astro';
 import HeroActions from '../components/ui/HeroActions.astro';
-import PhotoSlot from '../components/ui/PhotoSlot.astro';
+import Notice from '../components/ui/Notice.astro';
 import Rows from '../components/ui/Rows.astro';
 import Section from '../components/ui/Section.astro';
 import SectionHead from '../components/ui/SectionHead.astro';
 import Split from '../components/ui/Split.astro';
-import { cafeMenu, contact } from '../data/site';
+import ToggleButton from '../components/ui/ToggleButton.astro';
+import { cafeMenu, reservationBranches, reservationTypes, seatingOptions } from '../data/cafe-menu';
+import { contact } from '../data/site';
+import Photo from '../components/ui/Photo.astro';
+import { photos } from '../data/photos';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const branches = [
   {
     number: 'Branch 01',
     name: 'Kimihurura',
-    photo: 'Kimihurura café (rw.kivunoir.coffee/pages/our-cafe)',
+    photo: photos.cafeCounter,
     hours: [
       { label: 'Monday – Friday', value: '8am – 8pm' },
       { label: 'Saturday', value: '9am – 5pm' },
@@ -32,7 +42,7 @@ const branches = [
   {
     number: 'Branch 02',
     name: 'Norrsken',
-    photo: 'Norrsken café (rw.kivunoir.coffee/pages/our-cafe)',
+    photo: photos.cafeKnWall,
     hours: [
       { label: 'Monday – Friday', value: '8am – 6pm' },
       { label: 'Saturday', value: '9am – 5pm' },
@@ -43,30 +53,28 @@ const branches = [
   },
 ];
 
-const signatures = [
-  { name: 'African latte', price: 'RWF 8,000', image: lattePour, alt: 'An African latte being poured' },
-  { name: 'Pour over', price: 'RWF 5,000', photo: 'Pour over (kivunoir.rw menu)' },
-  { name: 'Affogato', price: 'RWF 12,000', photo: 'Affogato (rw.kivunoir.coffee/pages/our-cafe)' },
-  { name: 'Cherry cold brew', price: 'RWF 7,500', photo: 'Cherry cold brew (kivunoir.rw menu)' },
-];
+const menuPhotos = import.meta.glob<{ default: ImageMetadata }>('../assets/menu/*.webp', { eager: true });
+const menuPhoto = (slug: string) => menuPhotos[`../assets/menu/${slug}.webp`]?.default;
 
 const [firstTab] = cafeMenu;
+const [firstType] = reservationTypes;
 ---
 
 <BaseLayout
   current="cafe"
-  title="Café · Kimihurura & Norrsken"
-  description="Two cafés in Kigali pouring Kivu Noir estate coffee — the same menu at Kimihurura and Norrsken."
+  title="Café · Menu & reservations"
+  description="Two cafés in Kigali pouring Kivu Noir estate coffee, with pastries baked daily and an all-day kitchen. See the menu and reserve a table."
 >
   <Hero>
     <Breadcrumbs current="Café" />
     <Display as="h1" size="xl">Visit the café today</Display>
     <p class="max-w-110 text-body-lg text-ink-muted">
-      Two cafés in Kigali pouring our own estate coffee — the same menu at Kimihurura and Norrsken.
+      Two cafés in Kigali pouring our own estate coffee, with pastries baked daily and an all-day kitchen. The same menu
+      at Kimihurura and Norrsken.
     </p>
     <HeroActions>
-      <Button variant="roast" href="#menu">See the menu</Button>
-      <Button variant="secondary" href="https://www.kivunoir.rw/reservation/make">Reserve a table</Button>
+      <Button variant="roast" href="#reserve">Reserve a table</Button>
+      <Button variant="secondary" href="#menu">See the menu</Button>
     </HeroActions>
     <Cover slot="media" src={cafeInterior} alt="The Kivu Noir café interior" loading="eager" />
   </Hero>
@@ -78,13 +86,16 @@ const [firstTab] = cafeMenu;
       {
         branches.map((branch) => (
           <article class="flex flex-col gap-6">
-            <PhotoSlot label={branch.photo} class="aspect-4/3" />
+            <Photo photo={branch.photo} sizes="(min-width: 600px) 50vw, 100vw" class="aspect-4/3" />
             <Eyebrow roast>{branch.number}</Eyebrow>
             <Display as="h3" size="heading">
               {branch.name}
             </Display>
             <Rows rows={branch.hours} muted="label" />
-            <div>
+            <div class="flex flex-wrap items-center gap-6">
+              <Button size="sm" href="#reserve">
+                Reserve here
+              </Button>
               <Button variant="secondary" size="sm" href={branch.directions}>
                 Directions
               </Button>
@@ -96,16 +107,13 @@ const [firstTab] = cafeMenu;
   </Section>
 
   <!-- Menu -->
-  <Section theme="noir" id="menu">
-    <SectionHead
-      eyebrow="The menu"
-      title="One menu, both cafés"
-      roast
-      link={{ href: 'https://www.kivunoir.rw/menu/cafe', label: 'Full menu with photos' }}
-    >
+  <Section raised id="menu">
+    <SectionHead eyebrow="The menu" title="One menu, both cafés">
       <p class="text-body-lg text-ink-muted">
-        Every coffee is made with our own estate beans, roasted in Kigali. Prices in Rwandan francs.
+        Every coffee is made with our own estate beans, roasted in Kigali. Pastries are baked daily. Prices in Rwandan
+        francs.
       </p>
+      <Button slot="action" variant="secondary" href="#reserve">Reserve a table</Button>
     </SectionHead>
     <div role="group" aria-label="Menu sections" class="mb-12 flex flex-wrap gap-x-8 border-b border-line">
       {
@@ -117,64 +125,170 @@ const [firstTab] = cafeMenu;
             aria-controls={`menu-${section.id}`}
             class="-mb-px cursor-pointer border-b-2 border-transparent py-3 text-nav text-ink-muted uppercase transition-colors duration-200 hover:text-ink aria-pressed:border-roast aria-pressed:text-ink"
           >
-            {section.label} <span class="text-ink-muted">{section.items.length}</span>
+            {section.label}
           </button>
         ))
       }
     </div>
     {
       cafeMenu.map((section) => (
-        <ul
-          id={`menu-${section.id}`}
-          data-menu-panel={section.id}
-          hidden={section.id !== firstTab.id}
-          aria-label={section.label}
-          class="grid grid-cols-1 gap-x-16 md:grid-cols-2"
-        >
-          {section.items.map(([name, price]) => (
-            <li class="flex items-baseline justify-between gap-4 border-b border-line py-4">
-              <span class="text-menu">{name}</span>
-              <span class="text-row whitespace-nowrap text-ink-muted tabular-nums">RWF {price}</span>
-            </li>
-          ))}
-        </ul>
+        <div id={`menu-${section.id}`} data-menu-panel={section.id} hidden={section.id !== firstTab.id}>
+          {section.groups.map((group) => {
+            const cards = group.items.flatMap((item) => {
+              const image = item.photo ? menuPhoto(item.photo) : undefined;
+              return image ? [{ ...item, image }] : [];
+            });
+            const rows = group.items.filter((item) => !item.photo || !menuPhoto(item.photo));
+            return (
+              <div class="mb-16 flex flex-col gap-8">
+                {group.title && (
+                  <h3 class="border-b border-line pb-3 text-eyebrow text-roast uppercase">{group.title}</h3>
+                )}
+                {cards.length > 0 && (
+                  <ul class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 md:grid-cols-4">
+                    {cards.map((item) => (
+                      <li class="flex flex-col gap-3">
+                        <div class="relative aspect-square overflow-hidden bg-noir-900">
+                          <Image
+                            src={item.image}
+                            alt={item.name}
+                            widths={[320, 480, 640]}
+                            sizes="(min-width: 1280px) 296px, (min-width: 900px) 22vw, (min-width: 600px) 45vw, 92vw"
+                            quality={70}
+                            class="size-full object-cover"
+                          />
+                        </div>
+                        <div class="flex items-baseline justify-between gap-3">
+                          <h4 class="text-menu/6">{item.name}</h4>
+                          <span class="text-row whitespace-nowrap text-ink-muted tabular-nums">RWF {item.price}</span>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                {rows.length > 0 && (
+                  <ul class="grid grid-cols-1 gap-x-16 md:grid-cols-2">
+                    {rows.map((item) => (
+                      <li class="flex items-baseline justify-between gap-4 border-b border-line py-4">
+                        <span class="text-menu">{item.name}</span>
+                        <span class="text-row whitespace-nowrap text-ink-muted tabular-nums">RWF {item.price}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            );
+          })}
+        </div>
       ))
     }
-    <p class="mt-12 text-caption text-ink-muted">
-      Pastries and food are served at both cafés — ask at the counter. Allergen information is available on request.
-    </p>
+    <p class="text-caption text-ink-muted">Allergen information is available at the counter.</p>
   </Section>
 
-  <!-- Signatures -->
-  <Section>
-    <SectionHead eyebrow="From the bar" title="Worth the trip" size="heading" />
-    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-4">
-      {
-        signatures.map((item) => (
-          <figure class="flex flex-col gap-3">
-            {item.image ? (
-              <div class="relative aspect-4/5 overflow-hidden bg-noir-900">
-                <Cover src={item.image} alt={item.alt} sizes="(min-width: 900px) 25vw, (min-width: 600px) 50vw, 100vw" />
-              </div>
-            ) : (
-              <PhotoSlot label={item.photo ?? item.name} class="aspect-4/5" />
-            )}
-            <figcaption class="flex items-baseline justify-between gap-4">
-              <span class="text-title-sm">{item.name}</span>
-              <span class="whitespace-nowrap text-ink-muted tabular-nums">{item.price}</span>
-            </figcaption>
-          </figure>
-        ))
-      }
+  <!-- Reservations -->
+  <Section theme="noir" id="reserve">
+    <SectionHead eyebrow="Reservations" title="Reserve a table" roast>
+      <p class="text-body-lg text-ink-muted">
+        For coffee, breakfast or lunch, or the Tasting Room. No payment is needed for groups of ten or fewer.
+      </p>
+    </SectionHead>
+    <div class="flex flex-wrap items-start gap-16">
+      <form id="reservation-form" class="flex min-w-0 flex-[999_1_560px] flex-col">
+        <input type="hidden" name="branch" value={reservationBranches[0].id} data-branch-input />
+        <input type="hidden" name="type" value={firstType.id} data-type-input />
+
+        <fieldset>
+          <legend class="mb-3 text-eyebrow text-ink-muted uppercase">Café</legend>
+          <div class="flex flex-wrap gap-2">
+            {
+              reservationBranches.map((branch, index) => (
+                <ToggleButton pressed={index === 0} data-branch={branch.id}>
+                  {branch.label}
+                </ToggleButton>
+              ))
+            }
+          </div>
+        </fieldset>
+
+        <fieldset class="mt-6">
+          <legend class="mb-3 text-eyebrow text-ink-muted uppercase">Reservation</legend>
+          <div class="flex flex-wrap gap-2">
+            {
+              reservationTypes.map((type, index) => (
+                <ToggleButton pressed={index === 0} data-type={type.id}>
+                  {type.label}
+                </ToggleButton>
+              ))
+            }
+          </div>
+        </fieldset>
+
+        <FormGrid class="mt-8">
+          <Field id="r-date" name="date" label="Date" type="date" required />
+          <Field id="r-time" name="time" label="Time" type="select" options={firstType.times} required />
+          <GuestStepper id="r-guests" />
+          <Field
+            id="r-seating"
+            name="seating"
+            label="Seating"
+            type="select"
+            options={seatingOptions.map((option) => ({ value: option.id, label: option.label }))}
+          />
+          <Field id="r-name" name="name" label="Full name" autocomplete="name" required />
+          <Field id="r-phone" name="phone" label="Phone" type="tel" autocomplete="tel" placeholder="+250" required />
+          <Field id="r-email" name="email" label="Email" type="email" autocomplete="email" full />
+          <Field
+            id="r-notes"
+            name="notes"
+            label="Occasion or requests"
+            type="textarea"
+            placeholder="Birthday, high chair, pre-order…"
+            full
+          />
+        </FormGrid>
+
+        <Notice class="mt-6" role="note" data-deposit-note />
+        <Notice class="mt-6" data-reservation-notice>Thank you. Your request is with us.</Notice>
+        <div class="mt-8 flex flex-wrap items-center gap-6">
+          <Button type="submit" variant="roast">Request reservation</Button>
+          <span class="text-small text-ink-muted">Tables are held for 20 minutes after your time.</span>
+        </div>
+      </form>
+
+      <Card as="aside" aria-label="Reservation policy" class="min-w-0 flex-[1_1_340px]">
+        <Eyebrow roast>Good to know</Eyebrow>
+        <Rows
+          muted="label"
+          rows={[
+            { label: 'Up to 10 guests', value: 'No payment needed' },
+            { label: 'More than 10', value: 'RWF 100,000 deposit, or 50% with pre-order' },
+            { label: 'Arrival', value: 'Held 20 minutes, then released' },
+            { label: 'Pets', value: 'Outdoors, supervised' },
+          ]}
+        />
+        <CardTitle class="mt-4">The Tasting Room</CardTitle>
+        <p class="text-small text-ink-muted">
+          A private room for up to 10 guests. RWF 100,000, fully consumable. A RWF 50,000 deposit secures it; the balance
+          is paid on arrival. Cancel at least 24 hours ahead for a full refund.
+        </p>
+        <Rows
+          muted="label"
+          rows={[
+            { label: 'Reservations', value: '+250 791 501 679' },
+            { label: 'Tasting Room', value: contact.phoneRw },
+            { label: 'Email', value: 'cafe@kivunoir.coffee' },
+          ]}
+        />
+      </Card>
     </div>
   </Section>
 
   <!-- Private events -->
-  <Split>
-    <PhotoSlot slot="media" label="Café opening day / community (rw.kivunoir.coffee/pages/our-cafe)" class="absolute inset-0" />
-    <Eyebrow roast>Private events</Eyebrow>
+  <Split theme="blanc" flip>
+    <Cover slot="media" src={photos.cafeOpeningDay.src} alt={photos.cafeOpeningDay.alt} />
+    <Eyebrow>Private events</Eyebrow>
     <Display>Host your evening with us</Display>
-    <p class="text-body-lg text-ink-muted">Book either café for launches, gatherings and private tastings.</p>
+    <p class="text-body-lg text-ink-muted">Launches, gatherings and private tastings — tell us what you have in mind.</p>
     <Rows
       class="max-w-120"
       muted="label"
@@ -184,19 +298,85 @@ const [firstTab] = cafeMenu;
         { label: 'Follow', value: contact.instagram },
       ]}
     />
-    <div><Button href="https://www.kivunoir.rw/reservation/make">Make a reservation</Button></div>
   </Split>
 </BaseLayout>
 
 <script>
+  import { reservationBranches, reservationTypes } from '../data/cafe-menu';
+
+  /* Menu tabs */
   const tabs = document.querySelectorAll<HTMLButtonElement>('[data-menu-tab]');
   const panels = document.querySelectorAll<HTMLElement>('[data-menu-panel]');
-
   tabs.forEach((tab) => {
     tab.addEventListener('click', () => {
-      const id = tab.dataset.menuTab;
       tabs.forEach((t) => t.setAttribute('aria-pressed', String(t === tab)));
-      panels.forEach((panel) => (panel.hidden = panel.dataset.menuPanel !== id));
+      panels.forEach((panel) => (panel.hidden = panel.dataset.menuPanel !== tab.dataset.menuTab));
     });
+  });
+
+  /* Reservation form */
+  const form = document.querySelector<HTMLFormElement>('#reservation-form');
+  const branchInput = document.querySelector<HTMLInputElement>('[data-branch-input]');
+  const typeInput = document.querySelector<HTMLInputElement>('[data-type-input]');
+  const timeSelect = document.querySelector<HTMLSelectElement>('#r-time');
+  const seating = document.querySelector<HTMLSelectElement>('#r-seating');
+  const depositNote = document.querySelector<HTMLElement>('[data-deposit-note]');
+  const notice = document.querySelector<HTMLElement>('[data-reservation-notice]');
+  let guests = 2;
+
+  const hideNotice = () => {
+    if (notice) notice.hidden = true;
+  };
+
+  const updateDeposit = () => {
+    if (!depositNote) return;
+    let text = '';
+    if (seating?.value === 'tasting') {
+      text = 'The Tasting Room seats up to 10 and is RWF 100,000, fully consumable. We will ask for a RWF 50,000 deposit to secure it.';
+    } else if (guests > 10) {
+      text = 'For groups of more than 10 we ask for a RWF 100,000 deposit (or 50% of a pre-order), paid before the day and taken off your bill.';
+    }
+    depositNote.textContent = text;
+    depositNote.hidden = !text;
+  };
+
+  const setGuests = (value: number) => {
+    const max = seating?.value === 'tasting' ? 10 : 40;
+    guests = Math.min(max, Math.max(1, value));
+    form?.querySelectorAll('[data-guests]').forEach((el) => (el.textContent = String(guests)));
+    updateDeposit();
+  };
+
+  const pick = (selector: string, attr: string, input: HTMLInputElement | null, onPick?: (id: string) => void) => {
+    const buttons = document.querySelectorAll<HTMLButtonElement>(selector);
+    buttons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const id = button.getAttribute(attr) ?? '';
+        buttons.forEach((b) => b.setAttribute('aria-pressed', String(b === button)));
+        if (input) input.value = id;
+        onPick?.(id);
+        hideNotice();
+      });
+    });
+  };
+
+  pick('[data-branch]', 'data-branch', branchInput);
+  pick('[data-type]', 'data-type', typeInput, (id) => {
+    const type = reservationTypes.find((t) => t.id === id) ?? reservationTypes[0];
+    if (timeSelect) timeSelect.replaceChildren(...type.times.map((time) => new Option(time)));
+  });
+
+  form?.querySelectorAll<HTMLButtonElement>('[data-guests-step]').forEach((button) => {
+    button.addEventListener('click', () => setGuests(guests + Number(button.dataset.guestsStep)));
+  });
+  seating?.addEventListener('change', () => setGuests(guests));
+
+  form?.addEventListener('submit', (event) => {
+    event.preventDefault();
+    if (!notice) return;
+    const name = String(new FormData(form).get('name') ?? '').trim();
+    const branch = reservationBranches.find((b) => b.id === branchInput?.value) ?? reservationBranches[0];
+    notice.textContent = `Thank you, ${name.split(' ')[0] || 'friend'}. Your request for ${guests} at ${branch.label} is with us. We will confirm by phone or email.`;
+    notice.hidden = false;
   });
 </script>

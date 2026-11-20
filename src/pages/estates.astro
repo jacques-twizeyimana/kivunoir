@@ -6,12 +6,14 @@ import CardTitle from '../components/ui/CardTitle.astro';
 import Container from '../components/ui/Container.astro';
 import Display from '../components/ui/Display.astro';
 import Eyebrow from '../components/ui/Eyebrow.astro';
-import PhotoSlot from '../components/ui/PhotoSlot.astro';
 import PullQuote from '../components/ui/PullQuote.astro';
 import Rows from '../components/ui/Rows.astro';
 import Section from '../components/ui/Section.astro';
 import SpecList from '../components/ui/SpecList.astro';
 import Tag from '../components/ui/Tag.astro';
+import Cover from '../components/ui/Cover.astro';
+import Photo from '../components/ui/Photo.astro';
+import { photos } from '../data/photos';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const estates = [
@@ -21,7 +23,7 @@ const estates = [
     name: 'Buliza',
     altitude: '1,790',
     lede: 'Sweetness first, then jam and citrus, with a fruity finish.',
-    photo: 'Buliza estate (caferwa.coffee/estates)',
+    image: photos.buliza,
     specs: [
       ['Location', 'Burega, Rulindo, Northern Province'],
       ['From Kigali', 'About one hour'],
@@ -38,7 +40,7 @@ const estates = [
     name: 'Cyebumba',
     altitude: '1,900',
     lede: 'A definite floral aroma over nutty, fruity, juicy flavours — balanced and smooth.',
-    photo: 'Cyebumba estate (caferwa.coffee/estates)',
+    image: photos.cyebumba,
     specs: [
       ['Location', 'Kivumu, Rutsiro, Western Province'],
       ['Altitude', '1,900 m'],
@@ -60,7 +62,7 @@ const [buliza, cyebumba] = estates;
   description="Buliza in the north and Cyebumba in the west: same Red Bourbon arabica, two distinct cups shaped by altitude and soil."
 >
   <section data-theme="noir" class="relative flex min-h-140 items-end md:min-h-170">
-    <PhotoSlot label="Estate landscape, full bleed (caferwa.coffee/estates hero)" labelTop class="absolute inset-0 text-right" />
+    <Cover src={photos.cyebumba.src} alt="" sizes="100vw" loading="eager" />
     <span class="absolute inset-0 bg-linear-to-t from-noir-950/82 via-noir-950/35 via-45% to-noir-950/0 to-70%" aria-hidden="true"></span>
     <Container class="relative pb-16 md:pb-24">
       <div class="flex max-w-220 flex-col gap-8">
@@ -99,8 +101,9 @@ const [buliza, cyebumba] = estates;
       <>
         <Section id={estate.id}>
           <div class="grid grid-cols-1 items-center gap-y-8 md:grid-cols-12 md:gap-x-6">
-            <PhotoSlot
-              label={estate.photo}
+            <Photo
+              photo={estate.image}
+              sizes="(min-width: 900px) 55vw, 100vw"
               class:list={[
                 'aspect-4/5 md:col-span-7',
                 index === 1 ? 'md:col-start-6 md:row-start-1' : 'md:col-start-1',
@@ -158,11 +161,18 @@ const [buliza, cyebumba] = estates;
           ]}
         />
       </div>
-      <div class="relative aspect-4/3 bg-noir-900 text-stone-300">
-        <span class="absolute top-1/2 left-1/2 size-14 -translate-1/2 border-2 border-current opacity-35" aria-hidden="true"></span>
-        <p class="absolute inset-x-6 bottom-6 text-caption">
-          Map · Rwanda with Kigali, Buliza and Cyebumba marked (caferwa.coffee farm maps)
-        </p>
+      <div class="grid grid-cols-2 gap-6">
+        {
+          [
+            { photo: photos.mapBuliza, caption: 'Buliza · Northern Province' },
+            { photo: photos.mapCyebumba, caption: 'Cyebumba · Western Province' },
+          ].map((map) => (
+            <figure class="flex flex-col gap-3">
+              <Photo photo={map.photo} sizes="(min-width: 900px) 25vw, 50vw" light class="aspect-square" />
+              <figcaption class="text-caption text-ink-muted">{map.caption}</figcaption>
+            </figure>
+          ))
+        }
       </div>
     </div>
   </Section>

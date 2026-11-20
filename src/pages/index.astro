@@ -9,7 +9,6 @@ import Eyebrow from '../components/ui/Eyebrow.astro';
 import FeatureTile from '../components/ui/FeatureTile.astro';
 import Hero from '../components/ui/Hero.astro';
 import HeroActions from '../components/ui/HeroActions.astro';
-import PhotoSlot from '../components/ui/PhotoSlot.astro';
 import ProductCard from '../components/ui/ProductCard.astro';
 import PullQuote from '../components/ui/PullQuote.astro';
 import Rows from '../components/ui/Rows.astro';
@@ -19,6 +18,8 @@ import Split from '../components/ui/Split.astro';
 import Steps from '../components/ui/Steps.astro';
 import TextLink from '../components/ui/TextLink.astro';
 import { featuredProducts } from '../data/site';
+import Photo from '../components/ui/Photo.astro';
+import { photos } from '../data/photos';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const journey = [
@@ -77,7 +78,7 @@ const trade = [
     </div>
   </Section>
 
-  <PhotoSlot label="Terraced hills at the estate, misty morning, full bleed (caferwa.coffee/estates hero)" class="h-90 md:h-140" />
+  <Photo photo={photos.estateTerraces} sizes="100vw" position="center 65%" class="h-90 md:h-140" />
 
   <!-- From hillside to cup -->
   <Section>
@@ -109,7 +110,7 @@ const trade = [
         title="Buliza"
         text="Sweet, jammy, citrus — about an hour from Kigali."
         cta="Discover Buliza"
-        photo="Buliza estate (caferwa.coffee/estates)"
+        image={photos.buliza}
       />
       <FeatureTile
         href="/estates#cyebumba"
@@ -117,7 +118,7 @@ const trade = [
         title="Cyebumba"
         text="Floral, nutty and juicy, with a smooth, balanced body."
         cta="Discover Cyebumba"
-        photo="Cyebumba estate (caferwa.coffee/estates)"
+        image={photos.cyebumba}
       />
     </div>
   </Section>
@@ -188,7 +189,7 @@ const trade = [
 
   <!-- Visit -->
   <Split flip>
-    <PhotoSlot slot="media" label="Buliza estate tour (rw.kivunoir.coffee/collections/book-a-tour)" class="absolute inset-0" />
+    <Cover slot="media" src={photos.cherriesSorting.src} alt={photos.cherriesSorting.alt} />
     <Eyebrow roast>Visit</Eyebrow>
     <Display>Walk the rows where your coffee grows</Display>
     <p class="text-body-lg text-ink-muted">

@@ -8,6 +8,7 @@ interface Props {
   title: string;
   roast?: boolean;
   size?: 'lg' | 'heading';
+  /** A text link on the right; pass a slot="action" element instead for a button. */
   link?: { href: string; label: string };
   class?: string;
 }
@@ -21,5 +22,5 @@ const { eyebrow, title, roast = false, size = 'lg', link, class: className } = A
     <Display size={size}>{title}</Display>
     <slot />
   </div>
-  {link && <TextLink href={link.href}>{link.label}</TextLink>}
+  <slot name="action">{link && <TextLink href={link.href}>{link.label}</TextLink>}</slot>
 </div>

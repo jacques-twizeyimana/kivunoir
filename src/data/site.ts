@@ -1,5 +1,12 @@
 import type { ImageMetadata } from 'astro';
-import packagingTube from '../assets/images/packaging-tube.jpg';
+import cylinderFilterGround from '../assets/products/cylinder-filter-ground.webp';
+import cylinderWholeBean from '../assets/products/cylinder-whole-bean.webp';
+import darkRoastWholeBean from '../assets/products/dark-roast-whole-bean.webp';
+import espressoRoastFilterGround from '../assets/products/espresso-roast-filter-ground.webp';
+import espressoRoastWholeBean from '../assets/products/espresso-roast-whole-bean.webp';
+import mediumRoastGround from '../assets/products/medium-roast-ground.webp';
+import mediumRoastWholeBean from '../assets/products/medium-roast-whole-bean.webp';
+import { photos } from './photos';
 
 export type PageId = 'home' | 'story' | 'estates' | 'export' | 'cafe' | 'shop' | 'visit' | 'contact';
 
@@ -76,62 +83,26 @@ export const productFilters: { id: 'all' | ProductCategory; label: string }[] = 
 ];
 
 export const products: Product[] = [
-  { id: 'mw', cat: 'coffee', eyebrow: 'Medium roast', name: 'Kivu Noir medium roast', desc: 'Whole bean', price: 'From RWF 18,000', photo: 'Medium roast whole bean pack' },
-  { id: 'mg', cat: 'coffee', eyebrow: 'Medium roast', name: 'Kivu Noir medium roast', desc: 'Ground', price: 'From RWF 18,000', photo: 'Medium roast ground pack' },
-  { id: 'ew', cat: 'coffee', eyebrow: 'Espresso roast', name: 'Kivu Noir espresso roast', desc: 'Whole bean', price: 'From RWF 18,000', photo: 'Espresso roast whole bean pack' },
-  { id: 'eg', cat: 'coffee', eyebrow: 'Espresso roast', name: 'Kivu Noir espresso roast', desc: 'Filter ground', price: 'From RWF 18,000', photo: 'Espresso roast ground pack' },
-  { id: 'dw', cat: 'coffee', eyebrow: 'Dark roast', name: 'Kivu Noir dark roast', desc: 'Whole bean', price: 'From RWF 18,000', photo: 'Dark roast whole bean pack' },
-  { id: 'lw', cat: 'limited', eyebrow: 'Limited edition', name: 'The Kivu Noir cylinder', desc: 'Whole bean', price: 'RWF 40,000', image: packagingTube, alt: 'The black Kivu Noir cylinder', badge: 'Limited', soldOut: true },
-  { id: 'lg', cat: 'limited', eyebrow: 'Limited edition', name: 'The Kivu Noir cylinder', desc: 'Filter ground', price: 'RWF 40,000', image: packagingTube, alt: 'The black Kivu Noir cylinder', badge: 'Limited', soldOut: true },
+  { id: 'mw', cat: 'coffee', eyebrow: 'Medium roast', name: 'Kivu Noir medium roast', desc: 'Whole bean', price: 'From RWF 18,000', image: mediumRoastWholeBean, alt: 'Kivu Noir medium roast whole bean pack' },
+  { id: 'mg', cat: 'coffee', eyebrow: 'Medium roast', name: 'Kivu Noir medium roast', desc: 'Ground', price: 'From RWF 18,000', image: mediumRoastGround, alt: 'Kivu Noir medium roast ground coffee pack' },
+  { id: 'ew', cat: 'coffee', eyebrow: 'Espresso roast', name: 'Kivu Noir espresso roast', desc: 'Whole bean', price: 'From RWF 18,000', image: espressoRoastWholeBean, alt: 'Kivu Noir espresso roast whole bean pack' },
+  { id: 'eg', cat: 'coffee', eyebrow: 'Espresso roast', name: 'Kivu Noir espresso roast', desc: 'Filter ground', price: 'From RWF 18,000', image: espressoRoastFilterGround, alt: 'Kivu Noir espresso roast filter ground pack' },
+  { id: 'dw', cat: 'coffee', eyebrow: 'Dark roast', name: 'Kivu Noir dark roast', desc: 'Whole bean', price: 'From RWF 18,000', image: darkRoastWholeBean, alt: 'Kivu Noir dark roast whole bean pack' },
+  { id: 'lw', cat: 'limited', eyebrow: 'Limited edition', name: 'The Kivu Noir cylinder', desc: 'Whole bean', price: 'RWF 40,000', image: cylinderWholeBean, alt: 'The Kivu Noir limited edition cylinder', badge: 'Limited', soldOut: true },
+  { id: 'lg', cat: 'limited', eyebrow: 'Limited edition', name: 'The Kivu Noir cylinder', desc: 'Filter ground', price: 'RWF 40,000', image: cylinderFilterGround, alt: 'The black Kivu Noir limited edition cylinder', badge: 'Limited', soldOut: true },
   { id: 's1', cat: 'souvenir', eyebrow: 'Souvenir', name: '[Souvenir item]', desc: '[Material · size]', price: 'RWF [price]', photo: 'Souvenir item on bone ground' },
   { id: 's2', cat: 'souvenir', eyebrow: 'Souvenir', name: '[Souvenir item]', desc: '[Material · size]', price: 'RWF [price]', photo: 'Souvenir item on bone ground' },
   { id: 's3', cat: 'souvenir', eyebrow: 'Souvenir', name: '[Souvenir item]', desc: '[Material · size]', price: 'RWF [price]', photo: 'Souvenir item on bone ground' },
   { id: 's4', cat: 'souvenir', eyebrow: 'Gift set', name: '[Gift set name]', desc: '[What is inside]', price: 'RWF [price]', photo: 'Gift set on bone ground' },
-  { id: 't1', cat: 'experience', eyebrow: 'Experience', name: 'Buliza estate tour', desc: 'Northern Province', price: 'From RWF 360,000', photo: 'Buliza estate tour', cta: 'Book' },
-  { id: 't2', cat: 'experience', eyebrow: 'Experience', name: 'Tasting experience', desc: 'Kigali', price: 'RWF 100,000', photo: 'Tasting experience', cta: 'Book' },
+  { id: 't1', cat: 'experience', eyebrow: 'Experience', name: 'Buliza estate tour', desc: 'Northern Province', price: 'From RWF 360,000', image: photos.cherriesSorting.src, alt: photos.cherriesSorting.alt, cta: 'Book' },
+  { id: 't2', cat: 'experience', eyebrow: 'Experience', name: 'Tasting experience', desc: 'Kigali', price: 'RWF 100,000', image: photos.tastingCupping.src, alt: photos.tastingCupping.alt, cta: 'Book' },
 ];
 
 export const featuredProducts = [
-  { name: 'Medium roast', eyebrow: 'Whole bean', price: 'From RWF 18,000', photo: 'Medium roast whole bean pack' },
-  { name: 'Espresso roast', eyebrow: 'Whole bean', price: 'From RWF 18,000', photo: 'Espresso roast whole bean pack' },
-  { name: 'Dark roast', eyebrow: 'Whole bean', price: 'From RWF 18,000', photo: 'Dark roast whole bean pack' },
-  { name: 'Medium roast', eyebrow: 'Ground', price: 'From RWF 18,000', photo: 'Medium roast ground pack' },
-];
-
-/* ---------- Café menu ---------- */
-
-export interface MenuSection {
-  id: string;
-  label: string;
-  items: [name: string, price: string][];
-}
-
-export const cafeMenu: MenuSection[] = [
-  {
-    id: 'hot',
-    label: 'Hot drinks',
-    items: [['Espresso', '3,500'], ['Americano', '4,500'], ['Espresso macchiato', '4,000'], ['Pour over (Chemex / V60)', '5,000'], ['Aeropress', '5,000'], ['French press', '5,000'], ['African espresso', '6,000'], ['Cortado', '4,500'], ['Cappuccino', '5,000'], ['Flat white', '5,000'], ['Latte', '5,500'], ['Spanish latte', '6,500'], ['African latte', '8,000'], ['Caramel macchiato', '8,500'], ['Vanilla latte', '7,500'], ['Mocha', '9,000'], ['Nutmeg latte', '5,000'], ['Tiramisu latte', '10,500'], ['White mocha', '10,000'], ['Extra espresso shot', '2,000']],
-  },
-  {
-    id: 'iced',
-    label: 'Iced drinks',
-    items: [['Iced pour over', '6,000'], ['Espresso shakerato', '4,500'], ['Iced espresso', '3,500'], ['Cold brew', '6,000'], ['Iced Americano', '5,500'], ['Cherry cold brew', '7,500'], ['Iced latte', '6,000'], ['Iced Spanish latte', '7,000'], ['Iced mocha', '9,500'], ['Iced caramel macchiato', '9,000'], ['Iced tiramisu latte', '11,000'], ['Iced frappé (choose flavour)', '10,000'], ['Iced vanilla latte', '8,000'], ['Iced nutmeg latte', '5,500'], ['Iced African espresso', '6,500'], ['Iced white mocha', '10,500'], ['Coffee protein shake', '12,000'], ['Affogato', '12,000'], ['Hibiscus spritz', '9,000'], ['Plum Noir', '9,000']],
-  },
-  {
-    id: 'tea',
-    label: 'Tea & more',
-    items: [['Black loose leaf tea', '5,500'], ['Green loose leaf tea', '5,500'], ['Spice tea', '6,000'], ['African tea', '6,500'], ['Chai latte', '6,000'], ['Iced chai latte', '6,500'], ['Cascara tea', '5,000'], ['Iced cascara tea', '5,500'], ['Iced cascara spritz', '6,500'], ['Iced lemonade tea', '7,500'], ['Matcha tea', '9,000'], ['Iced matcha tea', '9,500'], ['Matcha mango', '12,000'], ['Hot chocolate', '9,000'], ['Iced chocolate', '9,500'], ['Ginger soda', '5,500'], ['Babyccino', '5,000']],
-  },
-  {
-    id: 'soft',
-    label: 'Soft drinks',
-    items: [['Water', '2,500'], ['Sparkling water', '2,500'], ['Mixed fruit juice', '10,000'], ['Pineapple juice', '10,000'], ['Green juice', '11,000'], ['Orange juice', '12,000'], ['Smoothie', '10,000']],
-  },
-  {
-    id: 'extras',
-    label: 'Extras',
-    items: [['Low-fat milk', '500'], ['Oat milk', '1,500'], ['Almond milk', '1,500'], ['Vanilla flavour', '1,500'], ['Caramel flavour', '1,500'], ['Hazelnut flavour', '1,500'], ['Condensed milk flavour', '1,500'], ['Spanish flavour', '1,500']],
-  },
+  { name: 'Medium roast', eyebrow: 'Whole bean', price: 'From RWF 18,000', image: mediumRoastWholeBean, alt: 'Kivu Noir medium roast whole bean pack' },
+  { name: 'Espresso roast', eyebrow: 'Whole bean', price: 'From RWF 18,000', image: espressoRoastWholeBean, alt: 'Kivu Noir espresso roast whole bean pack' },
+  { name: 'Dark roast', eyebrow: 'Whole bean', price: 'From RWF 18,000', image: darkRoastWholeBean, alt: 'Kivu Noir dark roast whole bean pack' },
+  { name: 'Medium roast', eyebrow: 'Ground', price: 'From RWF 18,000', image: mediumRoastGround, alt: 'Kivu Noir medium roast ground coffee pack' },
 ];
 
 export { experiences, type Experience } from './experiences';

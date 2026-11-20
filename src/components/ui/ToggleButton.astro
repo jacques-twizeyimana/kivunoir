@@ -1,0 +1,22 @@
+---
+/** A small pressable choice: outlined when off, filled when pressed. */
+interface Props {
+  pressed?: boolean;
+  class?: string;
+  [key: string]: unknown;
+}
+
+const { pressed = false, class: className, ...rest } = Astro.props;
+---
+
+<button
+  type="button"
+  aria-pressed={pressed ? 'true' : 'false'}
+  class:list={[
+    'inline-flex h-10 cursor-pointer items-center border-2 border-line-strong bg-transparent px-6 text-button whitespace-nowrap text-ink uppercase transition-colors duration-200 hover:bg-surface-inverse hover:text-ink-inverse aria-pressed:border-surface-inverse aria-pressed:bg-surface-inverse aria-pressed:text-ink-inverse',
+    className,
+  ]}
+  {...rest}
+>
+  <slot />
+</button>

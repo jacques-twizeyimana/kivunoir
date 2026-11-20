@@ -5,7 +5,6 @@ import Cover from '../components/ui/Cover.astro';
 import Display from '../components/ui/Display.astro';
 import Eyebrow from '../components/ui/Eyebrow.astro';
 import PageHero from '../components/ui/PageHero.astro';
-import PhotoSlot from '../components/ui/PhotoSlot.astro';
 import PullQuote from '../components/ui/PullQuote.astro';
 import Rows from '../components/ui/Rows.astro';
 import Section from '../components/ui/Section.astro';
@@ -13,12 +12,14 @@ import SectionHead from '../components/ui/SectionHead.astro';
 import Split from '../components/ui/Split.astro';
 import Steps from '../components/ui/Steps.astro';
 import { seedToCup } from '../data/site';
+import Photo from '../components/ui/Photo.astro';
+import { photos } from '../data/photos';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const gallery = [
-  { photo: 'Harvest at the estate', caption: 'Harvest at the estate' },
-  { photo: 'Drying beds at the washing station', caption: 'Drying under the equatorial sun' },
-  { photo: 'Roasting in Kigali', caption: 'Roasting in Kigali' },
+  { photo: photos.estateTerraces, caption: 'High on the estate' },
+  { photo: photos.dryingStation, caption: 'Drying under the equatorial sun' },
+  { photo: photos.roasting, caption: 'Roasting in Kigali' },
 ];
 ---
 
@@ -34,7 +35,7 @@ const gallery = [
     </p>
   </PageHero>
 
-  <PhotoSlot label="Rwandan hills at dawn over the estate, full bleed (caferwa.coffee/estates hero)" class="h-100 md:h-170" />
+  <Photo photo={photos.cyebumba} sizes="100vw" class="h-100 md:h-170" />
 
   <!-- I · The land -->
   <Section space="loose">
@@ -59,7 +60,7 @@ const gallery = [
 
   <!-- II · The Bourbon -->
   <Split>
-    <PhotoSlot slot="media" label="Ripe red Bourbon cherries on the branch, close up" class="absolute inset-0" />
+    <Cover slot="media" src={photos.cherriesSorting.src} alt={photos.cherriesSorting.alt} />
     <Eyebrow roast>II · The Bourbon</Eyebrow>
     <Display>A heritage variety that found its home</Display>
     <p class="text-body-lg text-ink-muted">
@@ -72,7 +73,7 @@ const gallery = [
   <!-- III · The hands -->
   <Section space="loose">
     <div class="grid grid-cols-1 items-center gap-12 sm:grid-cols-2">
-      <PhotoSlot label="Hand-picking cherries / sorting at the washing station" light class="aspect-4/5" />
+      <Photo photo={photos.handSorting} position="30% center" class="aspect-4/5" />
       <div class="flex flex-col gap-8">
         <Eyebrow roast>III · The hands</Eyebrow>
         <Display>Picked by hand, sorted by eye</Display>
@@ -131,7 +132,7 @@ const gallery = [
       {
         gallery.map((item) => (
           <figure class="flex flex-col gap-3">
-            <PhotoSlot label={item.photo} class="aspect-4/5" />
+            <Photo photo={item.photo} sizes="(min-width: 900px) 33vw, (min-width: 600px) 50vw, 100vw" class="aspect-4/5" />
             <figcaption class="text-caption text-ink-muted">{item.caption}</figcaption>
           </figure>
         ))
@@ -159,7 +160,7 @@ const gallery = [
 
   <!-- Community -->
   <Split flip>
-    <PhotoSlot slot="media" label="Nursery school graduates (rw.kivunoir.coffee/pages/our-story)" class="absolute inset-0" />
+    <Cover slot="media" src={photos.nurseryGraduates.src} alt={photos.nurseryGraduates.alt} />
     <Eyebrow roast>Our community</Eyebrow>
     <Display>The next generation on the hills</Display>
     <p class="text-body-lg text-ink-muted">
