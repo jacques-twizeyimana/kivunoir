@@ -1,0 +1,532 @@
+[
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/17661483505.JPG",
+  "out": "src/assets/menu/espresso.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/17669318507.JPG",
+  "out": "src/assets/menu/americano.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/17669318116.jpg",
+  "out": "src/assets/menu/espresso-macchiato.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/1727338197102.jpeg",
+  "out": "src/assets/menu/pour-over-chemex-v60.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/1766044709103.JPG",
+  "out": "src/assets/menu/aeropress.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/176623264316.JPG",
+  "out": "src/assets/menu/french-press.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/17658972929.JPG",
+  "out": "src/assets/menu/african-espresso.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/176589747111.JPG",
+  "out": "src/assets/menu/cortado.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/176589734312.JPG",
+  "out": "src/assets/menu/cappuccino.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/176589738813.JPG",
+  "out": "src/assets/menu/flat-white.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/176589754114.JPG",
+  "out": "src/assets/menu/latte.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/176589757918.JPG",
+  "out": "src/assets/menu/spanish-latte.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/176589773093.JPG",
+  "out": "src/assets/menu/african-latte.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/176589778622.JPG",
+  "out": "src/assets/menu/caramel-macchiato.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/1765897847430.JPG",
+  "out": "src/assets/menu/vanilla-latte.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/176589808724.JPG",
+  "out": "src/assets/menu/mocha.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/1765902574326.JPG",
+  "out": "src/assets/menu/nutmeg-latte.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/176589818286.JPG",
+  "out": "src/assets/menu/tiramisu-latte.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/176623499298.JPG",
+  "out": "src/assets/menu/white-mocha.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/1766044653429.JPG",
+  "out": "src/assets/menu/iced-pour-over.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/1768552150495.JPG",
+  "out": "src/assets/menu/espresso-shakerato.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/1766044762428.JPG",
+  "out": "src/assets/menu/iced-espresso.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/176623181917.JPG",
+  "out": "src/assets/menu/cold-brew.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/176614769525.JPG",
+  "out": "src/assets/menu/iced-americano.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/176589836087.JPG",
+  "out": "src/assets/menu/cherry-cold-brew.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/176589844827.JPG",
+  "out": "src/assets/menu/iced-latte.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/176589911728.JPG",
+  "out": "src/assets/menu/iced-spanish-latte.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/176589859729.JPG",
+  "out": "src/assets/menu/iced-mocha.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/176589831930.JPG",
+  "out": "src/assets/menu/iced-caramel-macchiato.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/176589850585.JPG",
+  "out": "src/assets/menu/iced-tiramisu-latte.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/176589928196.JPG",
+  "out": "src/assets/menu/iced-frappe-choose-flavour.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/1765899448431.JPG",
+  "out": "src/assets/menu/iced-vanilla-latte.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/1765902431327.JPG",
+  "out": "src/assets/menu/iced-nutmeg-latte.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/176623239126.JPG",
+  "out": "src/assets/menu/iced-african-espresso.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/176589956831.JPG",
+  "out": "src/assets/menu/iced-white-mocha.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/1768553034499.JPG",
+  "out": "src/assets/menu/coffee-protein-shake.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/1765904315109.JPG",
+  "out": "src/assets/menu/affogato.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/1766232749361.JPG",
+  "out": "src/assets/menu/plum-noir.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/176589967476.JPG",
+  "out": "src/assets/menu/black-loose-leaf-tea.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/176590146877.JPG",
+  "out": "src/assets/menu/green-loose-leaf-tea.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/1765899949432.JPG",
+  "out": "src/assets/menu/spice-tea.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/176590022397.JPG",
+  "out": "src/assets/menu/african-tea.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/1765902499328.JPG",
+  "out": "src/assets/menu/chai-latte.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/1765902375329.JPG",
+  "out": "src/assets/menu/iced-chai-latte.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/176598155540.JPG",
+  "out": "src/assets/menu/cascara-tea.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/176590289934.JPG",
+  "out": "src/assets/menu/iced-cascara-tea.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/176589866090.JPG",
+  "out": "src/assets/menu/iced-cascara-spritz.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/1768552729498.JPG",
+  "out": "src/assets/menu/hibiscus-spritz.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/176590279080.JPG",
+  "out": "src/assets/menu/iced-lemonade-tea.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/176590135439.JPG",
+  "out": "src/assets/menu/matcha-tea.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/176590183333.JPG",
+  "out": "src/assets/menu/iced-matcha-tea.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/1765903037159.JPG",
+  "out": "src/assets/menu/matcha-mango.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/176590007036.JPG",
+  "out": "src/assets/menu/hot-chocolate.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/176590152532.JPG",
+  "out": "src/assets/menu/iced-chocolate.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/1766233521120.JPG",
+  "out": "src/assets/menu/ginger-soda.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/1765900019110.JPG",
+  "out": "src/assets/menu/babyccino.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/1766045025427.JPG",
+  "out": "src/assets/menu/mixed-fruit-juice.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/1766147851105.JPG",
+  "out": "src/assets/menu/green-juice.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/1766044924121.JPG",
+  "out": "src/assets/menu/pineapple-juice.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/1765903108119.JPG",
+  "out": "src/assets/menu/orange-juice.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/1766045782104.JPG",
+  "out": "src/assets/menu/smoothie.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/1759735471116.JPG",
+  "out": "src/assets/menu/lemon-cake.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/1759735341106.JPG",
+  "out": "src/assets/menu/chocolat-noir.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/1759735950461.JPG",
+  "out": "src/assets/menu/choco-chip-cookie.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/1759735852394.JPG",
+  "out": "src/assets/menu/oatmeal-raisin-cookie.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/1759735741107.JPG",
+  "out": "src/assets/menu/banana-and-almond-bread.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/1759526535124.jpeg",
+  "out": "src/assets/menu/mixed-fruit-and-granola-bowl.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/1726137446142.jpg",
+  "out": "src/assets/menu/classic-waffle.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/1727425338136.jpg",
+  "out": "src/assets/menu/pancakes.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/1759528884123.JPG",
+  "out": "src/assets/menu/classic-french-toast.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/1759526728133.jpeg",
+  "out": "src/assets/menu/fresh-fruit-platter.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/1759736662463.JPG",
+  "out": "src/assets/menu/mediterranean-salad.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/1759518536128.JPG",
+  "out": "src/assets/menu/chicken-and-waffle.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/1727333547193.jpeg",
+  "out": "src/assets/menu/mini-pancakes.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/1727332789194.jpeg",
+  "out": "src/assets/menu/mini-waffle.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/1759916870475.JPG",
+  "out": "src/assets/menu/berry-cheesecake.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/1759530677468.jpeg",
+  "out": "src/assets/menu/passion-cheesecake.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/1727334486185.jpeg",
+  "out": "src/assets/menu/tiramisu-cake.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/1761052036197.JPG",
+  "out": "src/assets/menu/brownie-and-ice-cream.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/1759529664187.jpeg",
+  "out": "src/assets/menu/chocolat-noir-and-vanilla-ice-cream.webp",
+  "width": 640
+ },
+ {
+  "url": "https://s3-us-west-2.amazonaws.com/kamagram-store/kivu-noir/1759529465198.JPG",
+  "out": "src/assets/menu/ice-cream-waffle.webp",
+  "width": 640
+ },
+ {
+  "url": "https://rw.kivunoir.coffee/cdn/shop/files/About_KN_3f8ae983-b503-4b5b-80a7-85c11a57b130.png",
+  "out": "src/assets/photos/estate-terraces.webp",
+  "width": 1600
+ },
+ {
+  "url": "https://images.squarespace-cdn.com/content/v1/63e50e4c360c356e958e8e5c/7cb48edc-f605-41bf-b591-331d8abd7f3e/Buliza+estate.jpg?format=1500w",
+  "out": "src/assets/photos/buliza-coffee-branch.webp",
+  "width": 1400
+ },
+ {
+  "url": "https://images.squarespace-cdn.com/content/v1/63e50e4c360c356e958e8e5c/97495e30-9344-4c03-86c0-ce7a18019a2f/Cyebumba.jpg?format=2500w",
+  "out": "src/assets/photos/cyebumba-drying-beds.webp",
+  "width": 2000
+ },
+ {
+  "url": "https://images.squarespace-cdn.com/content/v1/63e50e4c360c356e958e8e5c/8b656d10-843e-4837-80da-4134bece2428/DSC_5895+%281%29.jpg?format=2500w",
+  "out": "src/assets/photos/hand-sorting.webp",
+  "width": 1800
+ },
+ {
+  "url": "https://images.squarespace-cdn.com/content/v1/63e50e4c360c356e958e8e5c/4d78bc05-9149-49ce-978a-f3a0d8d55260/Roasting+tour+pic+2.jpg",
+  "out": "src/assets/photos/roasting.webp",
+  "width": 1200
+ },
+ {
+  "url": "https://cdn.shopify.com/s/files/1/0251/6634/8376/files/Kivu_Noir_47_alternate.jpg?width=1600",
+  "out": "src/assets/photos/cherries-sorting.webp",
+  "width": 1600
+ },
+ {
+  "url": "https://cdn.shopify.com/s/files/1/0251/6634/8376/files/Kivu_Noir_58_alternate.jpg",
+  "out": "src/assets/photos/drying-station.webp",
+  "width": 1000
+ },
+ {
+  "url": "https://rw.kivunoir.coffee/cdn/shop/files/Yutes.png?width=1600",
+  "out": "src/assets/photos/nursery-graduates.webp",
+  "width": 1600
+ },
+ {
+  "url": "https://cdn.shopify.com/s/files/1/0251/6634/8376/products/Moshions_event_SD_012.jpg?width=1600",
+  "out": "src/assets/photos/tasting-cupping.webp",
+  "width": 1600
+ },
+ {
+  "url": "https://rw.kivunoir.coffee/cdn/shop/files/Kivu_noir_Opening_Day_1-2-VSCO_2.jpg?width=1600",
+  "out": "src/assets/photos/cafe-opening-day.webp",
+  "width": 1600
+ },
+ {
+  "url": "https://rw.kivunoir.coffee/cdn/shop/files/Copy_of_Kivu_noir_Opening_Day_1-18-VSCO_1.jpg?width=1600",
+  "out": "src/assets/photos/cafe-counter.webp",
+  "width": 1600
+ },
+ {
+  "url": "https://rw.kivunoir.coffee/cdn/shop/files/Kivu_Noir_Header.png?width=1600",
+  "out": "src/assets/photos/cafe-kn-wall.webp",
+  "width": 1600
+ },
+ {
+  "url": "https://images.squarespace-cdn.com/content/v1/63e50e4c360c356e958e8e5c/d4f736bc-649c-41ea-8207-5689212e5e85/maps-02.png",
+  "out": "src/assets/maps/buliza.webp",
+  "width": 800,
+  "quality": 85
+ },
+ {
+  "url": "https://images.squarespace-cdn.com/content/v1/63e50e4c360c356e958e8e5c/2bd4f742-9e89-4c29-b80b-335cfd2dc125/maps-04.png",
+  "out": "src/assets/maps/cyebumba.webp",
+  "width": 800,
+  "quality": 85
+ },
+ {
+  "url": "https://images.squarespace-cdn.com/content/v1/63e50e4c360c356e958e8e5c/eb46c314-41b8-4787-a1af-19cce2dfa4b5/1.png",
+  "out": "src/assets/certifications/haccp.webp",
+  "width": 400,
+  "quality": 85
+ },
+ {
+  "url": "https://images.squarespace-cdn.com/content/v1/63e50e4c360c356e958e8e5c/1a100a0f-8a11-4ef1-a2c9-446991249b40/Rwanda+FDA+logo.jpg",
+  "out": "src/assets/certifications/rwanda-fda.webp",
+  "width": 400,
+  "quality": 85
+ },
+ {
+  "url": "https://images.squarespace-cdn.com/content/v1/63e50e4c360c356e958e8e5c/d43ec2a6-3b6e-4bc4-8466-18e6d5569f94/3.png",
+  "out": "src/assets/certifications/rsb.webp",
+  "width": 400,
+  "quality": 85
+ },
+ {
+  "url": "https://cdn.shopify.com/s/files/1/0251/6634/8376/files/Kn_Products_SD_62.jpg?width=1200",
+  "out": "src/assets/products/medium-roast-whole-bean.webp",
+  "width": 1000
+ },
+ {
+  "url": "https://cdn.shopify.com/s/files/1/0251/6634/8376/files/KNGROUNDCOFFEEJPG.jpg?width=1200",
+  "out": "src/assets/products/medium-roast-ground.webp",
+  "width": 1000
+ },
+ {
+  "url": "https://cdn.shopify.com/s/files/1/0251/6634/8376/files/KNESPRESSOROAST.jpg?width=1200",
+  "out": "src/assets/products/espresso-roast-whole-bean.webp",
+  "width": 1000
+ },
+ {
+  "url": "https://cdn.shopify.com/s/files/1/0251/6634/8376/files/KNESPRESSOWTGROUNDROAST.jpg?width=1200",
+  "out": "src/assets/products/espresso-roast-filter-ground.webp",
+  "width": 1000
+ },
+ {
+  "url": "https://cdn.shopify.com/s/files/1/0251/6634/8376/files/Kn_Products_SD_84.jpg?width=1200",
+  "out": "src/assets/products/dark-roast-whole-bean.webp",
+  "width": 1000
+ },
+ {
+  "url": "https://cdn.shopify.com/s/files/1/0251/6634/8376/files/Kn_Products_HD_12.jpg?width=1200",
+  "out": "src/assets/products/cylinder-whole-bean.webp",
+  "width": 1000
+ },
+ {
+  "url": "https://cdn.shopify.com/s/files/1/0251/6634/8376/files/KNPRODUCT.jpg?width=1200",
+  "out": "src/assets/products/cylinder-filter-ground.webp",
+  "width": 1000
+ }
+]

@@ -1,0 +1,22 @@
+---
+import type { Photo as PhotoData } from '../../data/photos';
+import Cover from './Cover.astro';
+
+/** A photograph cropped to its box. Give the box a size with `class` (aspect ratio or height). */
+interface Props {
+  photo: PhotoData;
+  sizes?: string;
+  loading?: 'eager' | 'lazy';
+  /** object-position, e.g. "center 30%" */
+  position?: string;
+  /** Light ground behind transparent images such as maps. */
+  light?: boolean;
+  class?: string;
+}
+
+const { photo, sizes, loading, position, light = false, class: className } = Astro.props;
+---
+
+<div class:list={['relative overflow-hidden', light ? 'bg-bone-100' : 'bg-noir-900', className]}>
+  <Cover src={photo.src} alt={photo.alt} sizes={sizes} loading={loading} style={position ? `object-position: ${position}` : undefined} />
+</div>
