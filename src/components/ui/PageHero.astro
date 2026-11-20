@@ -1,0 +1,23 @@
+---
+import Breadcrumbs from './Breadcrumbs.astro';
+import Container from './Container.astro';
+import Display from './Display.astro';
+
+/** Text-only noir page hero with breadcrumbs. */
+interface Props {
+  crumb: string;
+  title: string;
+}
+
+const { crumb, title } = Astro.props;
+---
+
+<section data-theme="noir" class="pt-24 pb-16 md:pt-32 md:pb-24">
+  <Container>
+    <div class="flex max-w-220 flex-col gap-8">
+      <Breadcrumbs current={crumb} />
+      <Display as="h1" size="xl">{title}</Display>
+      <slot />
+    </div>
+  </Container>
+</section>

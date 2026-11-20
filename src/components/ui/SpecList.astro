@@ -1,0 +1,19 @@
+---
+/** Origin spec: label / value rows for an estate or lot. */
+interface Props {
+  specs: [label: string, value: string][];
+}
+
+const { specs } = Astro.props;
+---
+
+<dl class="border-t border-line">
+  {
+    specs.map(([label, value]) => (
+      <div class="grid grid-cols-[120px_1fr] gap-4 border-b border-line py-4 sm:grid-cols-[140px_1fr]">
+        <dt class="text-eyebrow/6 text-ink-muted uppercase">{label}</dt>
+        <dd class="text-body/6 text-ink">{value}</dd>
+      </div>
+    ))
+  }
+</dl>

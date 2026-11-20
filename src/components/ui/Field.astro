@@ -1,0 +1,62 @@
+---
+interface Props {
+  id: string;
+  label: string;
+  name?: string;
+  type?: 'text' | 'email' | 'tel' | 'date' | 'select' | 'textarea';
+  options?: string[];
+  required?: boolean;
+  autocomplete?: string;
+  placeholder?: string;
+  /** Span both columns of a Form grid. */
+  full?: boolean;
+  class?: string;
+}
+
+const {
+  id,
+  label,
+  name = id,
+  type = 'text',
+  options = [],
+  required = false,
+  autocomplete,
+  placeholder,
+  full = false,
+  class: className,
+} = Astro.props;
+
+const input =
+  'h-12 w-full rounded-none border-0 border-b border-line-strong bg-transparent p-0 font-sans text-body text-ink placeholder:text-ink-muted focus:border-b-2 focus:outline-none focus-visible:outline-2';
+---
+
+<div class:list={['flex min-w-0 flex-1 flex-col gap-2', full && 'sm:col-span-2', className]}>
+  <label for={id} class="text-eyebrow text-ink-muted uppercase">{label}</label>
+  {
+    type === 'select' ? (
+      <select id={id} name={name} class:list={[input, 'cursor-pointer appearance-none [&>option]:text-noir-950']}>
+        {options.map((option) => (
+          <option>{option}</option>
+        ))}
+      </select>
+    ) : type === 'textarea' ? (
+      <textarea
+        id={id}
+        name={name}
+        required={required}
+        placeholder={placeholder}
+        class:list={[input, 'h-30 resize-y pt-3']}
+      />
+    ) : (
+      <input
+        id={id}
+        name={name}
+        type={type}
+        required={required}
+        autocomplete={autocomplete as any}
+        placeholder={placeholder}
+        class={input}
+      />
+    )
+  }
+</div>

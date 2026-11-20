@@ -1,0 +1,14 @@
+---
+/** A confirmation set in words, never colour alone. Hidden until a script reveals it. */
+interface Props {
+  class?: string;
+  hidden?: boolean;
+  [key: string]: unknown;
+}
+
+const { class: className, hidden = true, ...rest } = Astro.props;
+---
+
+<p role="status" hidden={hidden} class:list={['p-6 text-body ring-2 ring-line-strong ring-inset', className]} {...rest}>
+  <slot />
+</p>

@@ -1,0 +1,199 @@
+@import "tailwindcss";
+
+/*
+ * Kivu Noir design tokens (from the Kivu Noir design system, tokens.json).
+ *
+ * Spacing uses Tailwind's default 4px scale, which lines up with the system's
+ * space-* tokens: space-1 = 1, space-2 = 2, space-3 = 3, space-4 = 4,
+ * space-5 (24px) = 6, space-6 (32px) = 8, space-8 (48px) = 12,
+ * space-10 (64px) = 16, space-12 (96px) = 24, space-16 (128px) = 32.
+ * Radius is square everywhere (Tailwind's default); rounded-full is the one disc.
+ */
+
+@font-face { font-family: "Jost"; src: url("/fonts/Jost-Light.woff2") format("woff2"); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: "Jost"; src: url("/fonts/Jost-Regular.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Jost"; src: url("/fonts/Jost-Medium.woff2") format("woff2"); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: "Newsreader"; src: url("/fonts/Newsreader-Regular.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Newsreader"; src: url("/fonts/Newsreader-Italic.woff2") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: "Newsreader"; src: url("/fonts/Newsreader-LightItalic.woff2") format("woff2"); font-weight: 300; font-style: italic; font-display: swap; }
+
+/* Palette: used directly only over photography; everything else uses the semantic colours below. */
+@theme static {
+  --color-*: initial;
+  --color-noir-950: #0b0b0b;
+  --color-noir-900: #161616;
+  --color-noir-800: #222222;
+  --color-noir-700: #333333;
+  --color-stone-600: #5e5a55;
+  --color-stone-400: #8c8781;
+  --color-stone-300: #aaa49d;
+  --color-bone-300: #e2dfda;
+  --color-bone-100: #f4f2ee;
+  --color-paper: #ffffff;
+  --color-roast-950: #21150e;
+  --color-roast-900: #3a2216;
+  --color-roast-700: #5c3a24;
+  --color-roast-500: #8a5a3b;
+  --color-roast-300: #c69b77;
+  --color-roast-200: #dcbfa5;
+  --color-crema-100: #f2e9e1;
+  --color-signal-700: #9b2c1c;
+  --color-signal-300: #f19a85;
+}
+
+@theme {
+  --font-*: initial;
+  --font-sans: "Jost", "Futura", "Century Gothic", system-ui, sans-serif;
+  --font-serif: "Newsreader", Georgia, "Times New Roman", serif;
+
+  --breakpoint-sm: 600px;
+  --breakpoint-md: 900px;
+
+  --container-site: 1280px;
+  --container-measure: 640px;
+
+  /* Type scale */
+  --text-*: initial;
+  --text-display-xl: 72px;
+  --text-display-xl--line-height: 76px;
+  --text-display-xl--letter-spacing: -0.01em;
+  --text-display-xl--font-weight: 300;
+  --text-display-lg: 52px;
+  --text-display-lg--line-height: 58px;
+  --text-display-lg--letter-spacing: -0.01em;
+  --text-display-lg--font-weight: 300;
+  --text-display-md: 40px;
+  --text-display-md--line-height: 48px;
+  --text-display-md--letter-spacing: -0.01em;
+  --text-display-md--font-weight: 300;
+  --text-heading: 36px;
+  --text-heading--line-height: 44px;
+  --text-heading--font-weight: 300;
+  --text-heading-sm: 30px;
+  --text-heading-sm--line-height: 38px;
+  --text-heading-sm--font-weight: 300;
+  --text-mark: 28px;
+  --text-mark--line-height: 36px;
+  --text-mark--font-weight: 300;
+  --text-title: 24px;
+  --text-title--line-height: 32px;
+  --text-title--font-weight: 400;
+  --text-title-sm: 20px;
+  --text-title-sm--line-height: 28px;
+  --text-menu: 17px;
+  --text-menu--line-height: 26px;
+  --text-eyebrow: 12px;
+  --text-eyebrow--line-height: 16px;
+  --text-eyebrow--letter-spacing: 0.24em;
+  --text-eyebrow--font-weight: 500;
+  --text-button: 13px;
+  --text-button--line-height: 16px;
+  --text-button--letter-spacing: 0.16em;
+  --text-button--font-weight: 500;
+  --text-nav: 13px;
+  --text-nav--line-height: 20px;
+  --text-nav--letter-spacing: 0.12em;
+  --text-tag: 11px;
+  --text-tag--line-height: 16px;
+  --text-tag--letter-spacing: 0.16em;
+  --text-tag--font-weight: 500;
+  --text-body-lg: 18px;
+  --text-body-lg--line-height: 30px;
+  --text-body-lg--font-weight: 300;
+  --text-body: 16px;
+  --text-body--line-height: 26px;
+  --text-row: 15px;
+  --text-row--line-height: 24px;
+  --text-small: 14px;
+  --text-small--line-height: 22px;
+  --text-caption: 12px;
+  --text-caption--line-height: 18px;
+  --text-caption--letter-spacing: 0.02em;
+  --text-quote: 32px;
+  --text-quote--line-height: 42px;
+  --text-quote--font-weight: 300;
+  --text-lede: 21px;
+  --text-lede--line-height: 34px;
+  --text-altitude: 96px;
+  --text-altitude--line-height: 96px;
+  --text-altitude--letter-spacing: -0.02em;
+  --text-altitude--font-weight: 300;
+
+  --ease-out: ease-out;
+}
+
+/* Semantic colours switch with the section's data-theme (blanc or noir). */
+@theme inline {
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --color-surface-inverse: var(--surface-inverse);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-inverse: var(--ink-inverse);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-roast: var(--roast);
+  --color-roast-strong: var(--roast-strong);
+  --color-on-roast: var(--on-roast);
+  --color-roast-soft: var(--roast-soft);
+  --color-danger: var(--danger);
+}
+
+@layer base {
+  :root,
+  [data-theme="blanc"] {
+    --surface: var(--color-paper);
+    --surface-raised: var(--color-bone-100);
+    --surface-inverse: var(--color-noir-950);
+    --ink: var(--color-noir-950);
+    --ink-muted: var(--color-stone-600);
+    --ink-inverse: var(--color-paper);
+    --line: var(--color-bone-300);
+    --line-strong: var(--color-noir-950);
+    --roast: var(--color-roast-700);
+    --roast-strong: var(--color-roast-900);
+    --on-roast: var(--color-paper);
+    --roast-soft: var(--color-crema-100);
+    --focus-ring: var(--color-roast-700);
+    --danger: var(--color-signal-700);
+  }
+
+  [data-theme="noir"] {
+    --surface: var(--color-noir-950);
+    --surface-raised: var(--color-noir-900);
+    --surface-inverse: var(--color-paper);
+    --ink: var(--color-bone-100);
+    --ink-muted: var(--color-stone-300);
+    --ink-inverse: var(--color-noir-950);
+    --line: var(--color-noir-700);
+    --line-strong: var(--color-bone-100);
+    --roast: var(--color-roast-300);
+    --roast-strong: var(--color-roast-200);
+    --on-roast: var(--color-noir-950);
+    --roast-soft: var(--color-roast-950);
+    --focus-ring: var(--color-roast-300);
+    --danger: var(--color-signal-300);
+  }
+
+  [data-theme] {
+    background-color: var(--surface);
+    color: var(--ink);
+  }
+
+  body {
+    @apply bg-surface font-sans text-body text-ink antialiased;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+      transition: none !important;
+    }
+  }
+}

@@ -1,0 +1,106 @@
+---
+import { Image } from 'astro:assets';
+import lockupNoir from '../../assets/logos/lockup-noir.svg';
+import { navAll, navLeft, navRight, type PageId } from '../../data/site';
+
+interface Props {
+  current: PageId;
+}
+
+const { current } = Astro.props;
+const navLink =
+  'border-b-2 py-1.5 text-nav uppercase transition-colors duration-200 ease-out hover:border-line-strong';
+const linkState = (id: PageId) => (id === current ? 'border-roast' : 'border-transparent');
+---
+
+<div data-theme="blanc" class="relative">
+  <div class="bg-surface-inverse px-4 py-2.5 text-center text-caption/5 tracking-[0.2em] text-ink-inverse uppercase">
+    Free daily delivery in Rwanda · <a href="/visit" class="underline underline-offset-4">Book an estate visit</a>
+  </div>
+  <header
+    class="grid h-16 grid-cols-[1fr_auto_1fr] items-center border-b border-line bg-surface px-4 md:h-22 md:px-8"
+  >
+    <div class="justify-self-start">
+      <button
+        type="button"
+        data-menu-toggle
+        aria-expanded="false"
+        aria-controls="mobile-nav"
+        class="cursor-pointer py-2.5 text-nav text-ink uppercase md:hidden"
+      >
+        Menu
+      </button>
+      <nav aria-label="Primary" class="hidden gap-8 md:flex">
+        {
+          navLeft.map((item) => (
+            <a
+              href={item.href}
+              aria-current={item.id === current ? 'page' : undefined}
+              class:list={[navLink, linkState(item.id)]}
+            >
+              {item.label}
+            </a>
+          ))
+        }
+      </nav>
+    </div>
+    <a href="/" aria-label="Kivu Noir home" class="col-start-2 inline-flex justify-self-center">
+      <Image src={lockupNoir} alt="Kivu Noir" class="h-8 w-auto md:h-10" loading="eager" />
+    </a>
+    <div class="flex items-center gap-8 justify-self-end">
+      <nav aria-label="Visit and shop" class="hidden gap-8 md:flex">
+        {
+          navRight.map((item) => (
+            <a
+              href={item.href}
+              aria-current={item.id === current ? 'page' : undefined}
+              class:list={[navLink, linkState(item.id)]}
+            >
+              {item.label}
+            </a>
+          ))
+        }
+      </nav>
+      <a href="/shop" class:list={[navLink, 'border-transparent whitespace-nowrap']}>
+        Cart<span
+          data-cart-count
+          class="ml-1.5 inline-grid h-5 min-w-5 place-items-center rounded-full bg-surface-inverse text-[11px] leading-none tracking-normal text-ink-inverse"
+          >0</span
+        >
+      </a>
+    </div>
+  </header>
+  <nav
+    id="mobile-nav"
+    aria-label="Mobile"
+    hidden
+    class="flex flex-col border-b border-line bg-surface px-4 pt-4 pb-8 md:hidden"
+  >
+    {
+      navAll.map((item) => (
+        <a
+          href={item.href}
+          aria-current={item.id === current ? 'page' : undefined}
+          class:list={[
+            'border-b border-line py-4 text-[15px]/[22px] tracking-[0.12em] uppercase',
+            item.id === current ? 'text-roast' : 'text-ink',
+          ]}
+        >
+          {item.label}
+        </a>
+      ))
+    }
+  </nav>
+</div>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const menu = document.getElementById('mobile-nav');
+
+  toggle?.addEventListener('click', () => {
+    const open = toggle.getAttribute('aria-expanded') !== 'true';
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.textContent = open ? 'Close' : 'Menu';
+    if (menu) menu.hidden = !open;
+  });
+</script>

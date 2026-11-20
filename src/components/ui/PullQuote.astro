@@ -1,0 +1,19 @@
+---
+interface Props {
+  quote: string;
+  cite: string;
+  class?: string;
+}
+
+const { quote, cite, class: className } = Astro.props;
+---
+
+<blockquote
+  class:list={[
+    "relative flex max-w-180 flex-col gap-6 pl-12 before:absolute before:top-2.5 before:left-0 before:size-5 before:border-2 before:border-line-strong before:content-['']",
+    className,
+  ]}
+>
+  <p class="font-serif text-heading-sm font-light italic sm:text-quote">{quote}</p>
+  <cite class="text-eyebrow text-ink-muted not-italic uppercase">{cite}</cite>
+</blockquote>

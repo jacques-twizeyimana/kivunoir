@@ -1,0 +1,112 @@
+---
+import { Image } from 'astro:assets';
+import lockupBlanc from '../../assets/logos/lockup-blanc.svg';
+
+const columns = [
+  {
+    title: 'Explore',
+    links: [
+      { label: 'Our story', href: '/story' },
+      { label: 'Seed to cup', href: '/story#seed-to-cup' },
+      { label: 'Buliza & Cyebumba estates', href: '/estates' },
+      { label: 'Café & menu', href: '/cafe' },
+      { label: 'Shop', href: '/shop' },
+    ],
+  },
+  {
+    title: 'Trade & visits',
+    links: [
+      { label: 'Export & green coffee', href: '/export' },
+      { label: 'Private label & wholesale', href: '/export#services' },
+      { label: 'Book an estate visit', href: '/visit' },
+      { label: 'FAQ', href: '/contact' },
+      { label: 'Contact', href: '/contact#contact' },
+    ],
+  },
+];
+
+const social = [
+  { label: 'Instagram', href: 'https://www.instagram.com/kivunoircafe/' },
+  { label: 'X', href: 'https://twitter.com/kivunoir' },
+  { label: 'Facebook', href: 'https://web.facebook.com/kivunoir' },
+  { label: 'YouTube', href: 'https://www.youtube.com/channel/UCR08y3wFJO0ou8JOFIUNODA' },
+];
+
+const link = 'text-small text-ink hover:underline hover:underline-offset-4';
+const heading = 'mb-4 text-eyebrow text-ink-muted uppercase';
+---
+
+<footer data-theme="noir" class="flex flex-col gap-12 px-6 pt-16 pb-8 md:px-24">
+  <div class="grid grid-cols-1 gap-12 sm:grid-cols-2 md:grid-cols-[1.4fr_1fr_1fr_1.4fr]">
+    <div>
+      <Image src={lockupBlanc} alt="Kivu Noir" class="h-14 w-auto" />
+      <p class="mt-6 max-w-70 text-small text-ink-muted">
+        Single estate Red Bourbon arabica from the high hills of Rwanda, roasted in Kigali and poured fresh.
+      </p>
+      <p class="mt-4 text-caption text-ink-muted">Rwanda single estate arabica</p>
+    </div>
+    {
+      columns.map((column) => (
+        <div>
+          <h2 class={heading}>{column.title}</h2>
+          <ul class="flex flex-col gap-2">
+            {column.links.map((item) => (
+              <li>
+                <a href={item.href} class={link}>
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
+    <div class="flex flex-col gap-6">
+      <h2 class="text-eyebrow text-ink-muted uppercase">Letters from the estate</h2>
+      <p class="text-small text-ink-muted">Harvest news, new roasts and café events. A few times a year.</p>
+      <form data-demo-form class="flex flex-col gap-4">
+        <div class="flex items-end gap-4">
+          <div class="flex min-w-0 flex-1 flex-col gap-2">
+            <label for="footer-email" class="text-eyebrow text-ink-muted uppercase">Email</label>
+            <input
+              id="footer-email"
+              name="email"
+              type="email"
+              autocomplete="email"
+              placeholder="you@example.com"
+              required
+              class="h-12 w-full border-0 border-b border-line-strong bg-transparent p-0 text-body text-ink placeholder:text-ink-muted focus:border-b-2 focus:outline-none focus-visible:outline-2"
+            />
+          </div>
+          <button
+            type="submit"
+            class="inline-flex h-10 cursor-pointer items-center border-2 border-surface-inverse bg-surface-inverse px-6 text-button text-ink-inverse uppercase transition-colors duration-200 hover:bg-transparent hover:text-ink"
+          >
+            Join
+          </button>
+        </div>
+        <p data-form-status role="status" hidden class="text-small">Thank you. You are on the list.</p>
+      </form>
+    </div>
+  </div>
+  <div class="flex flex-wrap items-center justify-between gap-6">
+    <ul class="flex flex-wrap gap-6">
+      {
+        social.map((item) => (
+          <li>
+            <a href={item.href} class={link} rel="noopener">
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <p class="text-caption text-ink-muted">HACCP · Rwanda FDA · S-Mark (Rwanda Standards Board)</p>
+  </div>
+  <div
+    class="flex flex-col justify-between gap-2 border-t border-line pt-6 text-caption text-ink-muted sm:flex-row"
+  >
+    <span>© 2026 Kivu Noir · Avenue des Poids Lourds, Muhima, Kigali</span>
+    <span>Kivu Noir Coffee Inc., Newark, Delaware, USA</span>
+  </div>
+</footer>

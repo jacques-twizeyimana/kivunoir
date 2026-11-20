@@ -1,0 +1,50 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+type Variant = 'primary' | 'secondary' | 'roast' | 'disabled';
+
+type Props = Omit<HTMLAttributes<'button'> & HTMLAttributes<'a'>, 'type'> & {
+  href?: string;
+  type?: 'button' | 'submit';
+  variant?: Variant;
+  size?: 'md' | 'sm';
+  block?: boolean;
+};
+
+const {
+  href,
+  type = 'button',
+  variant = 'primary',
+  size = 'md',
+  block = false,
+  class: className,
+  ...rest
+} = Astro.props;
+
+const variants: Record<Variant, string> = {
+  primary: 'border-surface-inverse bg-surface-inverse text-ink-inverse hover:bg-transparent hover:text-ink',
+  secondary: 'border-line-strong bg-transparent text-ink hover:bg-surface-inverse hover:text-ink-inverse',
+  roast: 'border-roast bg-roast text-on-roast hover:border-roast-strong hover:bg-roast-strong',
+  disabled: 'cursor-not-allowed border-line bg-transparent text-stone-400',
+};
+
+const classes = [
+  'inline-flex cursor-pointer items-center justify-center gap-2 border-2 text-button whitespace-nowrap uppercase transition-colors duration-200 ease-out',
+  size === 'sm' ? 'h-10 px-6' : 'h-12 px-8',
+  block && 'w-full',
+  variants[variant],
+  className,
+];
+---
+
+{
+  href ? (
+    <a href={href} class:list={classes} {...rest}>
+      <slot />
+    </a>
+  ) : (
+    <button type={type} class:list={classes} aria-disabled={variant === 'disabled' ? 'true' : undefined} {...rest}>
+      <slot />
+    </button>
+  )
+}

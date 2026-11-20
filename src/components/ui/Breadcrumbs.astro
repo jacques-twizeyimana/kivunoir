@@ -1,0 +1,18 @@
+---
+interface Props {
+  current: string;
+  /** Lighter ink for crumbs set on a photograph. */
+  onPhoto?: boolean;
+}
+
+const { current, onPhoto = false } = Astro.props;
+---
+
+<nav
+  aria-label="Breadcrumb"
+  class:list={['flex gap-3 text-eyebrow font-normal uppercase', onPhoto ? 'text-bone-100' : 'text-ink-muted']}
+>
+  <a href="/" class:list={['transition-colors', onPhoto ? 'hover:text-paper' : 'hover:text-ink']}>Home</a>
+  <span aria-hidden="true">/</span>
+  <span aria-current="page">{current}</span>
+</nav>

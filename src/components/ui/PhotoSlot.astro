@@ -1,0 +1,25 @@
+---
+/**
+ * Marks where an official estate, product or café photograph goes.
+ * Replace with an <Image> once the photo is available.
+ */
+interface Props {
+  label: string;
+  light?: boolean;
+  labelTop?: boolean;
+  class?: string;
+}
+
+const { label, light = false, labelTop = false, class: className } = Astro.props;
+---
+
+<div
+  class:list={[
+    'relative overflow-hidden',
+    light ? 'bg-bone-100 text-stone-600' : 'bg-noir-900 text-stone-300',
+    className,
+  ]}
+>
+  <span class="absolute top-1/2 left-1/2 size-14 -translate-1/2 border-2 border-current opacity-35" aria-hidden="true"></span>
+  <p class:list={['absolute inset-x-6 text-caption', labelTop ? 'top-6' : 'bottom-6']}>Photo · {label}</p>
+</div>

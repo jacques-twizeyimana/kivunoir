@@ -1,0 +1,39 @@
+---
+import '../styles/global.css';
+import SiteFooter from '../components/site/SiteFooter.astro';
+import SiteHeader from '../components/site/SiteHeader.astro';
+import type { PageId } from '../data/site';
+
+interface Props {
+  title: string;
+  description: string;
+  current: PageId;
+}
+
+const { title, description, current } = Astro.props;
+const pageTitle = current === 'home' ? `Kivu Noir — ${title}` : `${title} — Kivu Noir`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preload" href="/fonts/Jost-Light.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/Jost-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <meta name="generator" content={Astro.generator} />
+    <title>{pageTitle}</title>
+  </head>
+  <body data-theme="blanc">
+    <SiteHeader current={current} />
+    <main>
+      <slot />
+    </main>
+    <SiteFooter />
+    <script>
+      import '../scripts/demo-forms';
+    </script>
+  </body>
+</html>

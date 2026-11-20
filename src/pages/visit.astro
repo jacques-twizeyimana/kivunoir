@@ -1,0 +1,209 @@
+---
+import lattePour from '../assets/images/latte-pour.jpg';
+import Button from '../components/ui/Button.astro';
+import Cover from '../components/ui/Cover.astro';
+import Eyebrow from '../components/ui/Eyebrow.astro';
+import Field from '../components/ui/Field.astro';
+import FormGrid from '../components/ui/FormGrid.astro';
+import Notice from '../components/ui/Notice.astro';
+import PageHero from '../components/ui/PageHero.astro';
+import Section from '../components/ui/Section.astro';
+import { contact, experiences } from '../data/site';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const [initial] = experiences;
+const stepperButton =
+  'inline-flex size-11 cursor-pointer items-center justify-center border-2 border-line-strong text-title-sm text-ink transition-colors hover:bg-surface-inverse hover:text-ink-inverse';
+---
+
+<BaseLayout
+  current="visit"
+  title="Book a visit"
+  description="Walk a Kivu Noir estate, see the washing station at work and taste the coffee at its source, or join a guided tasting in Kigali."
+>
+  <PageHero crumb="Book a visit" title="Book a visit">
+    <p class="max-w-measure text-body-lg text-ink-muted">
+      Walk an estate, see the washing station at work and taste the coffee at its source — or join us in Kigali for a
+      guided tasting.
+    </p>
+  </PageHero>
+
+  <Section>
+    <div class="flex flex-wrap items-start gap-16">
+      <!-- Booking form -->
+      <form id="booking-form" class="flex min-w-0 flex-[999_1_560px] flex-col">
+        <input type="hidden" name="experience" value={initial.id} data-experience-input />
+
+        <fieldset class="flex flex-col gap-6">
+          <legend class="mb-6 text-eyebrow text-ink-muted uppercase">1 · Choose your experience</legend>
+          <div class="grid gap-4">
+            {
+              experiences.map((experience) => (
+                <button
+                  type="button"
+                  data-experience={experience.id}
+                  aria-pressed={experience.id === initial.id ? 'true' : 'false'}
+                  class="group grid w-full cursor-pointer grid-cols-[24px_1fr_auto] items-start gap-4 p-6 text-left text-ink ring-1 ring-line transition-shadow duration-200 ring-inset hover:ring-line-strong aria-pressed:ring-2 aria-pressed:ring-line-strong"
+                >
+                  <span
+                    class="mt-1 size-5 rounded-full ring-1 ring-line-strong ring-inset group-aria-pressed:ring-6 group-aria-pressed:ring-roast"
+                    aria-hidden="true"
+                  />
+                  <span>
+                    <span class="block text-title-sm">{experience.title}</span>
+                    <span class="mt-1 block text-small text-ink-muted">{experience.meta}</span>
+                  </span>
+                  <span class="text-row/7 whitespace-nowrap tabular-nums">{experience.price}</span>
+                </button>
+              ))
+            }
+          </div>
+        </fieldset>
+
+        <fieldset class="mt-12">
+          <legend class="mb-6 text-eyebrow text-ink-muted uppercase">2 · Date and party</legend>
+          <FormGrid>
+            <Field id="v-date" name="date" label="Preferred date" type="date" required />
+            <div class="flex flex-col gap-2">
+              <span id="v-guests-label" class="text-eyebrow text-ink-muted uppercase">Guests</span>
+              <div role="group" aria-labelledby="v-guests-label" class="flex h-12 items-center gap-4 border-b border-line-strong">
+                <button type="button" class={stepperButton} aria-label="Fewer guests" data-guests-step="-1">−</button>
+                <output data-guests aria-live="polite" class="min-w-8 text-center text-body-lg">2</output>
+                <button type="button" class={stepperButton} aria-label="More guests" data-guests-step="1">+</button>
+              </div>
+            </div>
+          </FormGrid>
+        </fieldset>
+
+        <fieldset class="mt-12">
+          <legend class="mb-6 text-eyebrow text-ink-muted uppercase">3 · Your details</legend>
+          <FormGrid>
+            <Field id="v-name" name="name" label="Full name" autocomplete="name" required />
+            <Field id="v-email" name="email" label="Email" type="email" autocomplete="email" required />
+            <Field id="v-phone" name="phone" label="Phone" type="tel" autocomplete="tel" placeholder="+250" />
+            <Field
+              id="v-type"
+              name="type"
+              label="I am visiting as"
+              type="select"
+              options={['A coffee lover', 'A trade buyer or roaster', 'A group or company', 'Press']}
+            />
+            <Field
+              id="v-notes"
+              name="notes"
+              label="Anything we should know"
+              type="textarea"
+              placeholder="Pickup in Kigali, dietary needs, languages…"
+              full
+            />
+          </FormGrid>
+        </fieldset>
+
+        <Notice class="mt-8" data-booking-notice>Thank you. We have your request and will confirm availability by email.</Notice>
+        <div class="mt-8 flex flex-wrap items-center gap-6">
+          <Button type="submit" variant="roast">Request booking</Button>
+          <span class="text-small text-ink-muted">No payment now. We confirm availability first.</span>
+        </div>
+      </form>
+
+      <!-- Summary -->
+      <aside data-theme="noir" aria-label="Booking summary" class="flex min-w-0 flex-[1_1_360px] flex-col gap-4 bg-surface-raised p-8">
+        <div class="relative -mx-8 -mt-8 mb-2 aspect-4/3 overflow-hidden bg-noir-900">
+          <div data-summary-media="tasting" hidden>
+            <Cover src={lattePour} alt="A latte being poured at a Kivu Noir tasting" sizes="(min-width: 900px) 33vw, 100vw" />
+          </div>
+          <div data-summary-media="estate" class="absolute inset-0 text-stone-300">
+            <span class="absolute top-1/2 left-1/2 size-14 -translate-1/2 border-2 border-current opacity-35" aria-hidden="true"></span>
+            <p class="absolute inset-x-6 bottom-6 text-caption">Photo · <span data-summary="photo">{initial.photo}</span></p>
+          </div>
+        </div>
+        <Eyebrow roast>Your visit</Eyebrow>
+        <p class="text-title" data-summary="title">{initial.title}</p>
+        <dl class="border-t border-line">
+          <div class="flex justify-between gap-4 border-b border-line py-4 text-row">
+            <dt class="text-ink-muted">Where</dt>
+            <dd class="text-right" data-summary="where">{initial.where}</dd>
+          </div>
+          <div class="flex justify-between gap-4 border-b border-line py-4 text-row">
+            <dt class="text-ink-muted">Guests</dt>
+            <dd class="text-right" data-guests>2</dd>
+          </div>
+          <div class="flex justify-between gap-4 border-b border-line py-4 text-row">
+            <dt class="text-ink-muted">Price</dt>
+            <dd class="text-right" data-summary="price">{initial.price}</dd>
+          </div>
+        </dl>
+        <p class="text-small text-ink-muted" data-summary="note">{initial.note}</p>
+        <p class="text-caption text-ink-muted">Questions? Call {contact.phoneRw} or write to {contact.email}.</p>
+      </aside>
+    </div>
+  </Section>
+
+  <Section raised>
+    <div class="grid grid-cols-1 gap-12 sm:grid-cols-2 md:grid-cols-3">
+      <div class="flex flex-col gap-3">
+        <Eyebrow>What to expect</Eyebrow>
+        <p>A walk through the estate with our team, the washing station and drying beds, and a cupping of the estate's coffee.</p>
+      </div>
+      <div class="flex flex-col gap-3">
+        <Eyebrow>What to bring</Eyebrow>
+        <p>Closed shoes, a light rain jacket and sun protection. The estates are high and the weather turns quickly.</p>
+      </div>
+      <div class="flex flex-col gap-3">
+        <Eyebrow>Trade visits</Eyebrow>
+        <p>
+          Roasters and importers can combine a visit with green coffee sampling.
+          <a href="/export" class="underline underline-offset-4">See export</a>.
+        </p>
+      </div>
+    </div>
+  </Section>
+</BaseLayout>
+
+<script>
+  import { experiences } from '../data/experiences';
+
+  const form = document.querySelector<HTMLFormElement>('#booking-form');
+  const notice = document.querySelector<HTMLElement>('[data-booking-notice]');
+  const experienceInput = document.querySelector<HTMLInputElement>('[data-experience-input]');
+  const choiceButtons = document.querySelectorAll<HTMLButtonElement>('[data-experience]');
+  let guests = 2;
+
+  const setText = (key: string, value: string) => {
+    document.querySelectorAll<HTMLElement>(`[data-summary="${key}"]`).forEach((el) => (el.textContent = value));
+  };
+
+  const choose = (id: string) => {
+    const chosen = experiences.find((x) => x.id === id) ?? experiences[0];
+    choiceButtons.forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.experience === chosen.id)));
+    if (experienceInput) experienceInput.value = chosen.id;
+    setText('title', chosen.title);
+    setText('where', chosen.where);
+    setText('price', chosen.price);
+    setText('note', chosen.note);
+    setText('photo', chosen.photo);
+    const isTasting = chosen.id === 'tasting';
+    document.querySelectorAll<HTMLElement>('[data-summary-media]').forEach((el) => {
+      el.hidden = (el.dataset.summaryMedia === 'tasting') !== isTasting;
+    });
+    if (notice) notice.hidden = true;
+  };
+
+  choiceButtons.forEach((button) => button.addEventListener('click', () => choose(button.dataset.experience ?? '')));
+
+  document.querySelectorAll<HTMLButtonElement>('[data-guests-step]').forEach((button) => {
+    button.addEventListener('click', () => {
+      guests = Math.min(30, Math.max(1, guests + Number(button.dataset.guestsStep)));
+      document.querySelectorAll('[data-guests]').forEach((el) => (el.textContent = String(guests)));
+    });
+  });
+
+  form?.addEventListener('submit', (event) => {
+    event.preventDefault();
+    if (!notice) return;
+    const name = String(new FormData(form).get('name') ?? '').trim();
+    const chosen = experiences.find((x) => x.id === experienceInput?.value) ?? experiences[0];
+    notice.textContent = `Thank you, ${name.split(' ')[0] || 'friend'}. We have your request for the ${chosen.title} and will confirm availability by email.`;
+    notice.hidden = false;
+  });
+</script>

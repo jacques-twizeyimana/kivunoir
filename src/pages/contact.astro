@@ -1,0 +1,123 @@
+---
+import Button from '../components/ui/Button.astro';
+import Card from '../components/ui/Card.astro';
+import CardTitle from '../components/ui/CardTitle.astro';
+import Display from '../components/ui/Display.astro';
+import Eyebrow from '../components/ui/Eyebrow.astro';
+import Field from '../components/ui/Field.astro';
+import FormGrid from '../components/ui/FormGrid.astro';
+import Notice from '../components/ui/Notice.astro';
+import PageHero from '../components/ui/PageHero.astro';
+import Section from '../components/ui/Section.astro';
+import SectionHead from '../components/ui/SectionHead.astro';
+import { contact, faqs } from '../data/site';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const offices = [
+  {
+    eyebrow: 'Rwanda',
+    title: 'Kivu Noir, Kigali',
+    lines: ['Avenue des Poids Lourds, Muhima, Kigali'],
+    phone: contact.phoneRw,
+    note: 'Orders, delivery and private events',
+  },
+  {
+    eyebrow: 'United States',
+    title: 'Kivu Noir Coffee Inc.',
+    lines: ['2035 Sunset Lake Road, Newark, Delaware 19702'],
+    phone: contact.phoneUs,
+    note: 'US orders and partners',
+  },
+  {
+    eyebrow: 'Email',
+    title: contact.email,
+    lines: ['Trade pricing, franchising and general questions.'],
+    note: `Instagram ${contact.instagram}`,
+  },
+];
+---
+
+<BaseLayout
+  current="contact"
+  title="FAQ & contact"
+  description="Answers about Kivu Noir coffee, deliveries and trade — and how to reach us in Kigali and the United States."
+>
+  <PageHero crumb="FAQ & contact" title="Questions, answered">
+    <p class="max-w-measure text-body-lg text-ink-muted">
+      About our coffee, deliveries and trade. If yours is not here, write to us below.
+    </p>
+  </PageHero>
+
+  <Section>
+    <div class="flex flex-wrap items-start gap-16">
+      <div class="flex min-w-0 flex-[1_1_280px] flex-col gap-6">
+        <Eyebrow>FAQ</Eyebrow>
+        <Display size="heading">About Kivu Noir</Display>
+      </div>
+      <div class="min-w-0 flex-[999_1_640px] border-t border-line">
+        {
+          faqs.map((faq, index) => (
+            <details name="faq" open={index === 0} class="group border-b border-line">
+              <summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-6 text-title-sm font-light text-ink [&::-webkit-details-marker]:hidden">
+                <span>{faq.q}</span>
+                <span class="text-title font-light text-ink-muted" aria-hidden="true">
+                  <span class="group-open:hidden">+</span>
+                  <span class="hidden group-open:inline">−</span>
+                </span>
+              </summary>
+              <p class="max-w-measure pb-8 text-ink-muted">{faq.a}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </Section>
+
+  <Section raised id="contact">
+    <SectionHead eyebrow="Contact" title="Talk to us" />
+    <div class="mb-24 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
+      {
+        offices.map((office) => (
+          <Card flat>
+            <Eyebrow roast>{office.eyebrow}</Eyebrow>
+            <CardTitle class="break-words">{office.title}</CardTitle>
+            {office.lines.map((line) => (
+              <p class="text-ink-muted">{line}</p>
+            ))}
+            {office.phone && <p>{office.phone}</p>}
+            <p class="text-small text-ink-muted">{office.note}</p>
+          </Card>
+        ))
+      }
+    </div>
+    <div class="flex flex-wrap items-start gap-16">
+      <div class="flex min-w-0 flex-[1_1_280px] flex-col gap-6">
+        <Display as="h3" size="heading">Send a message</Display>
+        <p class="text-ink-muted">We reply by email.</p>
+      </div>
+      <form data-demo-form class="flex min-w-0 flex-[999_1_640px] flex-col">
+        <FormGrid>
+          <Field id="c-name" label="Name" autocomplete="name" required />
+          <Field id="c-email" label="Email" type="email" autocomplete="email" required />
+          <Field
+            id="c-topic"
+            label="Topic"
+            type="select"
+            full
+            options={[
+              'An order or delivery',
+              'Trade, wholesale or export',
+              'Estate visit or tasting',
+              'Café or private event',
+              'Press',
+              'Something else',
+            ]}
+          />
+          <Field id="c-msg" label="Message" type="textarea" required full />
+        </FormGrid>
+        <Notice class="mt-6" data-form-status>Thank you. Your message has been sent.</Notice>
+        <div class="mt-6"><Button type="submit">Send message</Button></div>
+      </form>
+    </div>
+  </Section>
+</BaseLayout>

@@ -1,0 +1,257 @@
+---
+import Breadcrumbs from '../components/ui/Breadcrumbs.astro';
+import Button from '../components/ui/Button.astro';
+import Card from '../components/ui/Card.astro';
+import CardTitle from '../components/ui/CardTitle.astro';
+import Display from '../components/ui/Display.astro';
+import Eyebrow from '../components/ui/Eyebrow.astro';
+import Field from '../components/ui/Field.astro';
+import FormGrid from '../components/ui/FormGrid.astro';
+import Hero from '../components/ui/Hero.astro';
+import HeroActions from '../components/ui/HeroActions.astro';
+import Notice from '../components/ui/Notice.astro';
+import PhotoSlot from '../components/ui/PhotoSlot.astro';
+import Rows from '../components/ui/Rows.astro';
+import Section from '../components/ui/Section.astro';
+import SectionHead from '../components/ui/SectionHead.astro';
+import Steps from '../components/ui/Steps.astro';
+import { contact } from '../data/site';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const services = [
+  { title: 'Green coffee sourcing', text: 'Fully washed Rwandan arabica chosen for exceptional flavour, traceable origin and sustainable practice.' },
+  { title: 'Dry mill processing', text: 'Hulling and cleaning of parchment to export-ready green. Third-party processing on request.' },
+  { title: 'Private label roasting', text: 'Our coffee, roasted in Kigali and packed in custom packaging under your brand.' },
+  { title: 'Wholesale supply', text: 'Roasted beans for cafés, restaurants, hotels and retailers, in Rwanda and abroad.' },
+  { title: 'Barista support', text: 'Training, guidance and resources so your team gets the best from every cup.' },
+];
+
+const traceability = [
+  { where: '01 · Estate', title: 'Grow &amp; harvest', text: 'Red Bourbon arabica at 1,790–1,900 m on our own estates.' },
+  { where: '02 · Station', title: 'Wash &amp; dry', text: 'Fully washed at our stations, hand-sorted and sun-dried.' },
+  { where: '03 · Kigali', title: 'Mill &amp; grade', text: 'Dry milled and hand-sorted again before grading and bagging.' },
+  { where: '04 · Export', title: 'Ship', text: 'Green or roasted. Roasted coffee is air-freighted, typically within a month of harvest.' },
+];
+
+const lots = [
+  { estate: 'Buliza', region: 'Burega, Rulindo · Northern', altitude: '1,790 m', variety: 'Red Bourbon', profile: 'Sweet, jammy, citrus, fruity' },
+  { estate: 'Cyebumba', region: 'Kivumu, Rutsiro · Western', altitude: '1,900 m', variety: 'Red Bourbon', profile: 'Floral; nutty, fruity, juicy; smooth' },
+];
+
+const certifications = [
+  { name: 'HACCP', text: 'Hazards identified and controlled at every stage of production.' },
+  { name: 'Rwanda FDA', text: 'Compliance with national food safety regulation.' },
+  { name: 'S-Mark', text: 'Rwanda Standards Board certification.' },
+];
+
+const interests = [
+  { id: 'green', label: 'Green coffee', pressed: true },
+  { id: 'mill', label: 'Dry milling' },
+  { id: 'label', label: 'Private label' },
+  { id: 'wholesale', label: 'Wholesale' },
+  { id: 'barista', label: 'Barista support' },
+];
+
+const th = 'border-b-2 border-line-strong p-4 text-left text-eyebrow text-ink-muted uppercase';
+const td = 'border-b border-line px-4 py-5';
+---
+
+<BaseLayout
+  current="export"
+  title="Export & trade"
+  description="Single estate Red Bourbon from the Rwandan highlands, prepared for export in Kigali — green, roasted or private label."
+>
+  <Hero>
+    <Breadcrumbs current="Export & trade" />
+    <Eyebrow roast>For roasters, importers and hospitality</Eyebrow>
+    <Display as="h1" size="xl">Rwandan specialty coffee, traceable to the station</Display>
+    <p class="max-w-110 text-body-lg text-ink-muted">
+      Single estate Red Bourbon from the Rwandan highlands, grown on our own land and prepared for export in Kigali. You
+      buy from the hillside, not from a broker.
+    </p>
+    <HeroActions>
+      <Button variant="roast" href="#inquiry">Request samples</Button>
+      <Button variant="secondary" href="#services">Our services</Button>
+    </HeroActions>
+    <PhotoSlot slot="media" label="Washing station / drying beds (caferwa.coffee hero, Cyebumba)" class="absolute inset-0" />
+  </Hero>
+
+  <Section space="loose">
+    <div class="grid grid-cols-1 gap-12 sm:grid-cols-2">
+      <div class="flex flex-col gap-3">
+        <Eyebrow>Why Rwanda, why Kivu Noir</Eyebrow>
+        <Display>A rare origin, handled with care</Display>
+      </div>
+      <div class="flex flex-col gap-6">
+        <p class="text-body-lg">
+          Rwanda's high, volcanic hills and its heritage Bourbon produce some of the most sought-after specialty coffee
+          in Africa — sweet, bright and remarkably clean.
+        </p>
+        <p class="text-ink-muted">
+          Our lots come from two estates of our own. Because we wash, mill and roast close to where the coffee grows,
+          every bag is traceable and reaches you fresher than coffee that changes hands along the way.
+        </p>
+      </div>
+    </div>
+  </Section>
+
+  <!-- Services -->
+  <Section id="services">
+    <SectionHead eyebrow="What we offer" title="From green to roasted, under one roof" />
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
+      {
+        services.map((service, index) => (
+          <Card>
+            <Eyebrow roast>{String(index + 1).padStart(2, '0')}</Eyebrow>
+            <CardTitle>{service.title}</CardTitle>
+            <p class="text-ink-muted">{service.text}</p>
+          </Card>
+        ))
+      }
+      <Card theme="noir">
+        <Eyebrow roast>Trade pricing</Eyebrow>
+        <CardTitle>Franchise and partner enquiries</CardTitle>
+        <p class="text-ink-muted">Looking to stock or franchise Kivu Noir? Write to {contact.email}.</p>
+      </Card>
+    </div>
+  </Section>
+
+  <!-- Traceability -->
+  <Section theme="noir">
+    <SectionHead
+      eyebrow="Traceability"
+      title="Every lot, from seed to shipment"
+      roast
+      link={{ href: '/story#seed-to-cup', label: 'The full process' }}
+    >
+      <p class="text-body-lg text-ink-muted">
+        We control each stage ourselves, so every bag carries its estate, station and process.
+      </p>
+    </SectionHead>
+    <Steps steps={traceability} />
+  </Section>
+
+  <!-- Estate lots -->
+  <Section>
+    <SectionHead
+      eyebrow="Estate lots"
+      title="Profiles at a glance"
+      size="heading"
+      link={{ href: '/estates', label: 'Meet the estates' }}
+    />
+    <div class="overflow-x-auto">
+      <table class="w-full min-w-180 border-collapse text-row">
+        <thead>
+          <tr>
+            <th scope="col" class:list={[th, 'pl-0']}>Estate</th>
+            <th scope="col" class={th}>Region</th>
+            <th scope="col" class={th}>Altitude</th>
+            <th scope="col" class={th}>Variety</th>
+            <th scope="col" class:list={[th, 'pr-0']}>Cup profile</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            lots.map((lot) => (
+              <tr>
+                <th scope="row" class:list={[td, 'pl-0 text-left text-title-sm font-normal']}>
+                  {lot.estate}
+                </th>
+                <td class={td}>{lot.region}</td>
+                <td class={td}>{lot.altitude}</td>
+                <td class={td}>{lot.variety}</td>
+                <td class:list={[td, 'pr-0']}>{lot.profile}</td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-4 text-caption text-ink-muted">Screen 15+ single estate. Cupping notes and samples on request.</p>
+  </Section>
+
+  <!-- Certifications -->
+  <Section raised>
+    <SectionHead eyebrow="Certified" title="Food safety you can audit" size="heading" />
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
+      {
+        certifications.map((mark) => (
+          <div class="flex flex-col gap-3 p-8 ring-1 ring-line ring-inset">
+            <p class="text-mark">{mark.name}</p>
+            <p class="text-small text-ink-muted">{mark.text}</p>
+          </div>
+        ))
+      }
+    </div>
+  </Section>
+
+  <!-- Inquiry -->
+  <Section id="inquiry">
+    <div class="flex flex-wrap items-start gap-16">
+      <div class="flex min-w-0 flex-[1_1_360px] flex-col gap-8">
+        <Eyebrow>Trade enquiry</Eyebrow>
+        <Display>Request samples or a quote</Display>
+        <p class="text-ink-muted">Tell us what you need and where it is going. Our export team replies by email.</p>
+        <Rows
+          muted="label"
+          rows={[
+            { label: 'Trade & export', value: contact.email },
+            { label: 'Phone, Rwanda', value: contact.phoneRw },
+            { label: 'United States', value: contact.phoneUs },
+          ]}
+        />
+      </div>
+      <form data-demo-form class="flex min-w-0 flex-[999_1_560px] flex-col">
+        <fieldset class="flex flex-col gap-3">
+          <legend class="mb-3 text-eyebrow text-ink-muted uppercase">I am interested in</legend>
+          <div class="flex flex-wrap gap-2">
+            {
+              interests.map((interest) => (
+                <button
+                  type="button"
+                  data-interest={interest.id}
+                  aria-pressed={interest.pressed ? 'true' : 'false'}
+                  class="inline-flex h-10 cursor-pointer items-center border-2 border-line-strong bg-transparent px-6 text-button text-ink uppercase transition-colors duration-200 hover:bg-surface-inverse hover:text-ink-inverse aria-pressed:border-surface-inverse aria-pressed:bg-surface-inverse aria-pressed:text-ink-inverse"
+                >
+                  {interest.label}
+                </button>
+              ))
+            }
+          </div>
+        </fieldset>
+        <FormGrid class="mt-6">
+          <Field id="x-co" label="Company" autocomplete="organization" required />
+          <Field id="x-name" label="Your name" autocomplete="name" required />
+          <Field id="x-email" label="Work email" type="email" autocomplete="email" required />
+          <Field id="x-country" label="Country" autocomplete="country-name" />
+          <Field
+            id="x-vol"
+            label="Volume per year"
+            type="select"
+            options={['Samples only', 'Under 1 tonne', '1–10 tonnes', 'More than 10 tonnes']}
+          />
+          <Field id="x-form" label="Form" type="select" options={['Green', 'Roasted whole bean', 'Roasted ground']} />
+          <Field
+            id="x-msg"
+            label="Message"
+            type="textarea"
+            placeholder="Estates of interest, delivery port, packaging…"
+            full
+          />
+        </FormGrid>
+        <Notice class="mt-6" data-form-status>
+          Thank you. Your enquiry is with our export team; we will reply by email.
+        </Notice>
+        <div class="mt-6"><Button type="submit">Send enquiry</Button></div>
+      </form>
+    </div>
+  </Section>
+</BaseLayout>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-interest]').forEach((button) => {
+    button.addEventListener('click', () => {
+      button.setAttribute('aria-pressed', String(button.getAttribute('aria-pressed') !== 'true'));
+    });
+  });
+</script>

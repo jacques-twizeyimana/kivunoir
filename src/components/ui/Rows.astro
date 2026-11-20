@@ -1,0 +1,38 @@
+---
+export interface Row {
+  label: string;
+  value: string;
+  href?: string;
+}
+
+interface Props {
+  rows: Row[];
+  /** Which side is set in ink-muted. */
+  muted?: 'label' | 'value';
+  class?: string;
+}
+
+const { rows, muted = 'value', class: className } = Astro.props;
+---
+
+<dl class:list={['border-t border-line', className]}>
+  {
+    rows.map((row) => (
+      <div class="flex justify-between gap-4 border-b border-line py-4 text-row">
+        <dt class:list={[muted === 'label' && 'text-ink-muted']}>{row.label}</dt>
+        <dd class:list={['text-right', muted === 'value' && 'text-ink-muted']}>
+          {row.href ? (
+            <a
+              href={row.href}
+              class="bg-[linear-gradient(currentColor,currentColor)] bg-size-[100%_1px] bg-left-bottom bg-no-repeat pb-1 text-button/5 text-ink uppercase transition-colors hover:text-roast"
+            >
+              {row.value}
+            </a>
+          ) : (
+            row.value
+          )}
+        </dd>
+      </div>
+    ))
+  }
+</dl>

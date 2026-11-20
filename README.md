@@ -1,46 +1,25 @@
-# Astro Starter Kit: Basics
+# Kivu Noir website
+
+Astro + TypeScript + Tailwind CSS v4 build of the Kivu Noir site (eight pages: Home, Our story, Estates, Book a visit, Café, Shop, Export & trade, FAQ & contact).
+
+Requires Node 22.23.4 or newer (see `.nvmrc`).
 
 ```sh
-npm create astro@latest -- --template basics
+npm install
+npm run dev      # http://localhost:4321
+npm run build
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Structure
 
-## 🚀 Project Structure
+- `src/styles/global.css` holds the Kivu Noir design tokens as a Tailwind `@theme`: palette, type scale, breakpoints (600px / 900px), and the semantic colours (`surface`, `ink`, `roast`, …) that switch with `data-theme="blanc" | "noir"` on any section.
+- `src/components/ui/` has the design-system pieces (Button, TextLink, Eyebrow, Display, Section, Hero, Split, ProductCard, Field, …), styled with Tailwind utilities only.
+- `src/components/site/` has the shared header and footer.
+- `src/data/` holds the copy that repeats or drives interactions (navigation, products, café menu, visits, FAQ).
+- `src/pages/` has one file per page. Small inline scripts handle the menu toggle, café menu tabs, shop filters, the booking summary and the demo form confirmations.
 
-Inside of your Astro project, you'll see the following folders and files:
+## Still to do
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
-
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- **Photos.** Dark blocks labelled "Photo · …" (`PhotoSlot`) mark where the official estate, product and café photos go. Swap each one for an `<Image>` once the files are in `src/assets/images/`.
+- **Placeholder copy.** Bracketed text such as `[hours]`, `[street address]` and `[Souvenir item]` still needs real details.
+- **Forms.** The forms don't submit anywhere yet. They only show a confirmation message.

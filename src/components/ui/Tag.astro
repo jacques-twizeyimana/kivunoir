@@ -1,0 +1,19 @@
+---
+interface Props {
+  outline?: boolean;
+  as?: 'span' | 'li';
+  class?: string;
+}
+
+const { outline = false, as: Tag = 'span', class: className } = Astro.props;
+---
+
+<Tag
+  class:list={[
+    'inline-flex h-7 items-center px-3 text-tag uppercase',
+    outline ? 'bg-transparent text-ink ring-1 ring-line-strong ring-inset' : 'bg-roast-soft text-roast',
+    className,
+  ]}
+>
+  <slot />
+</Tag>

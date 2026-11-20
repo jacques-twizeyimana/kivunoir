@@ -1,0 +1,177 @@
+---
+import Breadcrumbs from '../components/ui/Breadcrumbs.astro';
+import Button from '../components/ui/Button.astro';
+import Card from '../components/ui/Card.astro';
+import CardTitle from '../components/ui/CardTitle.astro';
+import Container from '../components/ui/Container.astro';
+import Display from '../components/ui/Display.astro';
+import Eyebrow from '../components/ui/Eyebrow.astro';
+import PhotoSlot from '../components/ui/PhotoSlot.astro';
+import PullQuote from '../components/ui/PullQuote.astro';
+import Rows from '../components/ui/Rows.astro';
+import Section from '../components/ui/Section.astro';
+import SpecList from '../components/ui/SpecList.astro';
+import Tag from '../components/ui/Tag.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const estates = [
+  {
+    id: 'buliza',
+    number: 'Estate 01',
+    name: 'Buliza',
+    altitude: '1,790',
+    lede: 'Sweetness first, then jam and citrus, with a fruity finish.',
+    photo: 'Buliza estate (caferwa.coffee/estates)',
+    specs: [
+      ['Location', 'Burega, Rulindo, Northern Province'],
+      ['From Kigali', 'About one hour'],
+      ['Altitude', '1,790 m'],
+      ['Flavour', 'Sweet, jammy, citrus notes, fruity'],
+      ['Variety', 'Red Bourbon arabica'],
+    ] as [string, string][],
+    cta: { label: 'Book a Buliza visit', variant: 'roast' as const },
+    price: 'From RWF 360,000',
+  },
+  {
+    id: 'cyebumba',
+    number: 'Estate 02',
+    name: 'Cyebumba',
+    altitude: '1,900',
+    lede: 'A definite floral aroma over nutty, fruity, juicy flavours — balanced and smooth.',
+    photo: 'Cyebumba estate (caferwa.coffee/estates)',
+    specs: [
+      ['Location', 'Kivumu, Rutsiro, Western Province'],
+      ['Altitude', '1,900 m'],
+      ['Flavour', 'Floral aroma; nutty, fruity and juicy'],
+      ['Mouthfeel', 'Balanced, smooth'],
+      ['Variety', 'Red Bourbon arabica'],
+    ] as [string, string][],
+    cta: { label: 'Book a Cyebumba visit', variant: 'primary' as const },
+    price: 'Price on request',
+  },
+];
+
+const [buliza, cyebumba] = estates;
+---
+
+<BaseLayout
+  current="estates"
+  title="Our estates"
+  description="Buliza in the north and Cyebumba in the west: same Red Bourbon arabica, two distinct cups shaped by altitude and soil."
+>
+  <section data-theme="noir" class="relative flex min-h-140 items-end md:min-h-170">
+    <PhotoSlot label="Estate landscape, full bleed (caferwa.coffee/estates hero)" labelTop class="absolute inset-0 text-right" />
+    <span class="absolute inset-0 bg-linear-to-t from-noir-950/82 via-noir-950/35 via-45% to-noir-950/0 to-70%" aria-hidden="true"></span>
+    <Container class="relative pb-16 md:pb-24">
+      <div class="flex max-w-220 flex-col gap-8">
+        <Breadcrumbs current="Estates" onPhoto />
+        <Display as="h1" size="xl" class="text-paper">Two estates in the hills of Rwanda</Display>
+        <p class="max-w-measure text-body-lg text-bone-100">
+          Buliza in the north and Cyebumba in the west. Same Red Bourbon arabica, same care — two distinct cups shaped by
+          altitude and soil.
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Comparison -->
+  <Section space="tight">
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-12">
+      <Card href="#buliza" frame>
+        <Eyebrow>Northern Province</Eyebrow>
+        <CardTitle>Buliza · 1,790 m</CardTitle>
+        <ul class="flex flex-wrap gap-2">
+          {['Sweet', 'Jammy', 'Citrus', 'Fruity'].map((note) => <Tag as="li">{note}</Tag>)}
+        </ul>
+      </Card>
+      <Card href="#cyebumba" frame>
+        <Eyebrow>Western Province</Eyebrow>
+        <CardTitle>Cyebumba · 1,900 m</CardTitle>
+        <ul class="flex flex-wrap gap-2">
+          {['Floral', 'Nutty', 'Juicy', 'Smooth'].map((note) => <Tag as="li">{note}</Tag>)}
+        </ul>
+      </Card>
+    </div>
+  </Section>
+
+  {
+    [buliza, cyebumba].map((estate, index) => (
+      <>
+        <Section id={estate.id}>
+          <div class="grid grid-cols-1 items-center gap-y-8 md:grid-cols-12 md:gap-x-6">
+            <PhotoSlot
+              label={estate.photo}
+              class:list={[
+                'aspect-4/5 md:col-span-7',
+                index === 1 ? 'md:col-start-6 md:row-start-1' : 'md:col-start-1',
+              ]}
+            />
+            <div
+              class:list={[
+                'flex flex-col gap-8 md:col-span-4',
+                index === 1 ? 'md:col-start-1 md:row-start-1' : 'md:col-start-9',
+              ]}
+            >
+              <Eyebrow roast>{estate.number}</Eyebrow>
+              <Display>{estate.name}</Display>
+              <p class="flex flex-wrap items-baseline gap-x-2">
+                <span class="text-[64px]/16 font-light tracking-[-0.02em] sm:text-altitude">{estate.altitude}</span>
+                <span class="text-title text-ink-muted">m above sea level</span>
+              </p>
+              <p class="font-serif text-lede italic">{estate.lede}</p>
+              <SpecList specs={estate.specs} />
+              <div class="flex flex-wrap items-center gap-6">
+                <Button variant={estate.cta.variant} href="/visit">
+                  {estate.cta.label}
+                </Button>
+                <span class="text-small text-ink-muted">{estate.price}</span>
+              </div>
+            </div>
+          </div>
+        </Section>
+        {index === 0 && (
+          <Section theme="noir" space="loose" containerClass="flex justify-center">
+            <PullQuote
+              quote="High mountains, rich soil, equatorial sun and rain — the conditions Red Bourbon arabica was made for."
+              cite="On growing Red Bourbon in Rwanda"
+            />
+          </Section>
+        )}
+      </>
+    ))
+  }
+
+  <!-- Getting there -->
+  <Section raised>
+    <div class="grid grid-cols-1 items-center gap-12 sm:grid-cols-2">
+      <div class="flex flex-col gap-8">
+        <Eyebrow>Getting there</Eyebrow>
+        <Display size="heading">From Kigali to the estates</Display>
+        <p class="text-ink-muted">
+          Buliza is an easy day trip, about an hour north of the capital. Cyebumba sits further west in Rutsiro district;
+          tell us your dates and we will help you plan the journey.
+        </p>
+        <Rows
+          rows={[
+            { label: 'Kigali → Buliza', value: 'About 1 hour · Northern Province' },
+            { label: 'Kigali → Cyebumba', value: 'Western Province · [travel time]' },
+          ]}
+        />
+      </div>
+      <div class="relative aspect-4/3 bg-noir-900 text-stone-300">
+        <span class="absolute top-1/2 left-1/2 size-14 -translate-1/2 border-2 border-current opacity-35" aria-hidden="true"></span>
+        <p class="absolute inset-x-6 bottom-6 text-caption">
+          Map · Rwanda with Kigali, Buliza and Cyebumba marked (caferwa.coffee farm maps)
+        </p>
+      </div>
+    </div>
+  </Section>
+
+  <Section theme="noir" containerClass="flex flex-wrap items-center justify-between gap-6">
+    <div class="flex flex-col gap-3">
+      <Eyebrow roast>Visit an estate</Eyebrow>
+      <Display size="heading">Taste the coffee where it grows</Display>
+    </div>
+    <Button variant="secondary" href="/visit">Book a visit</Button>
+  </Section>
+</BaseLayout>

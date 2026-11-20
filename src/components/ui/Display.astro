@@ -1,0 +1,20 @@
+---
+import type { HTMLTag } from 'astro/types';
+
+interface Props {
+  as?: HTMLTag;
+  /** xl: hero headline · lg: section opener · heading: page and section titles */
+  size?: 'xl' | 'lg' | 'heading';
+  class?: string;
+}
+
+const { as: Tag = 'h2', size = 'lg', class: className } = Astro.props;
+
+const sizes = {
+  xl: 'text-heading sm:text-display-lg md:text-display-xl',
+  lg: 'text-heading sm:text-display-md md:text-display-lg',
+  heading: 'text-heading-sm sm:text-heading',
+};
+---
+
+<Tag class:list={[sizes[size], className]}><slot /></Tag>

@@ -1,0 +1,32 @@
+---
+import type { HTMLTag } from 'astro/types';
+
+interface Props {
+  as?: HTMLTag;
+  href?: string;
+  theme?: 'blanc' | 'noir';
+  /** Hairline frame on a transparent ground instead of a raised fill. */
+  frame?: boolean;
+  /** Use the page surface as the fill (for cards on a raised section). */
+  flat?: boolean;
+  class?: string;
+  [key: string]: unknown;
+}
+
+const { as, href, theme, frame = false, flat = false, class: className, ...rest } = Astro.props;
+const Tag = as ?? (href ? 'a' : 'div');
+---
+
+<Tag
+  href={href}
+  data-theme={theme}
+  class:list={[
+    'flex flex-col gap-4 p-8 text-ink',
+    frame ? 'bg-transparent ring-1 ring-line ring-inset' : flat ? 'bg-surface' : 'bg-surface-raised',
+    href && 'transition-shadow duration-200 hover:ring-line-strong',
+    className,
+  ]}
+  {...rest}
+>
+  <slot />
+</Tag>

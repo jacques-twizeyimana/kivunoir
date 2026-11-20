@@ -1,0 +1,27 @@
+---
+import PhotoSlot from './PhotoSlot.astro';
+
+interface Props {
+  href: string;
+  eyebrow: string;
+  title: string;
+  text: string;
+  cta: string;
+  photo: string;
+}
+
+const { href, eyebrow, title, text, cta, photo } = Astro.props;
+---
+
+<a href={href} class="group relative block aspect-4/5 overflow-hidden bg-noir-950 text-paper">
+  <PhotoSlot label={photo} labelTop class="absolute inset-0 transition-transform duration-600 ease-out group-hover:scale-103" />
+  <span
+    class="absolute inset-0 bg-linear-to-t from-noir-950/82 via-noir-950/35 via-45% to-noir-950/0 to-70%"
+    aria-hidden="true"></span>
+  <span class="absolute inset-x-8 bottom-8 flex flex-col gap-3">
+    <span class="text-eyebrow text-bone-100 uppercase">{eyebrow}</span>
+    <span class="text-heading-sm text-paper">{title}</span>
+    <span class="text-small text-bone-100">{text}</span>
+    <span class="self-start border-b border-paper pb-1 text-button/5 text-paper uppercase">{cta}</span>
+  </span>
+</a>

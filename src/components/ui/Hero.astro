@@ -1,0 +1,16 @@
+---
+/** Noir hero: copy on the left, a full-height photograph on the right. Pass a min-height class to override 680px. */
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+---
+
+<section data-theme="noir" class:list={['grid md:grid-cols-[1.1fr_1fr]', className ?? 'md:min-h-170']}>
+  <div class="flex flex-col justify-center gap-8 px-4 py-16 sm:px-6 md:py-24 md:pr-12 md:pl-24">
+    <slot />
+  </div>
+  <div class="relative min-h-105 overflow-hidden bg-surface-raised">
+    <slot name="media" />
+  </div>
+</section>

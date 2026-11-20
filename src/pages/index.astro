@@ -1,11 +1,212 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import cafeInterior from '../assets/images/cafe-interior.jpg';
+import lattePour from '../assets/images/latte-pour.jpg';
+import Button from '../components/ui/Button.astro';
+import Card from '../components/ui/Card.astro';
+import Cover from '../components/ui/Cover.astro';
+import Display from '../components/ui/Display.astro';
+import Eyebrow from '../components/ui/Eyebrow.astro';
+import FeatureTile from '../components/ui/FeatureTile.astro';
+import Hero from '../components/ui/Hero.astro';
+import HeroActions from '../components/ui/HeroActions.astro';
+import PhotoSlot from '../components/ui/PhotoSlot.astro';
+import ProductCard from '../components/ui/ProductCard.astro';
+import PullQuote from '../components/ui/PullQuote.astro';
+import Rows from '../components/ui/Rows.astro';
+import Section from '../components/ui/Section.astro';
+import SectionHead from '../components/ui/SectionHead.astro';
+import Split from '../components/ui/Split.astro';
+import Steps from '../components/ui/Steps.astro';
+import TextLink from '../components/ui/TextLink.astro';
+import { featuredProducts } from '../data/site';
+import BaseLayout from '../layouts/BaseLayout.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const journey = [
+  { where: 'The hillside', title: 'Grown slowly', text: "Red Bourbon arabica on our estates in Rwanda's high north and west." },
+  { where: 'The station', title: 'Washed with care', text: 'Cherries washed, sorted by hand and dried under the equatorial sun.' },
+  { where: 'Kigali', title: 'Roasted at home', text: "Milled, sorted once more by hand and roasted in Rwanda's capital." },
+  { where: 'Your cup', title: 'Poured fresh', text: 'Sent abroad by air or served in our cafés while the coffee is at its best.' },
+];
+
+const trade = [
+  { title: 'Green coffee', text: 'Traceable single estate lots from Buliza and Cyebumba.' },
+  { title: 'Private label', text: 'Roasted and packed in Kigali under your brand.' },
+  { title: 'Wholesale', text: 'Roasted beans for cafés, hotels, restaurants and retailers.' },
+  { title: 'Certified', text: 'HACCP · Rwanda FDA · S-Mark.' },
+];
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<BaseLayout
+  current="home"
+  title="From the volcanic shores of Lake Kivu"
+  description="Single estate Red Bourbon arabica from the high hills of Rwanda, roasted in Kigali and poured while it is at its freshest."
+>
+  <Hero class="md:min-h-180">
+    <Eyebrow roast>Rwanda single estate arabica</Eyebrow>
+    <Display as="h1" size="xl">From the volcanic shores of Lake Kivu</Display>
+    <p class="max-w-110 text-body-lg text-ink-muted">
+      Single estate Red Bourbon arabica from the high hills of Rwanda, roasted in Kigali and poured while it is at its
+      freshest.
+    </p>
+    <HeroActions>
+      <Button variant="roast" href="/shop">Shop coffee</Button>
+      <Button variant="secondary" href="/visit">Book an estate visit</Button>
+    </HeroActions>
+    <Cover slot="media" src={lattePour} alt="A barista pours steamed milk into a Kivu Noir latte" loading="eager" />
+  </Hero>
+
+  <!-- Where it begins -->
+  <Section space="loose">
+    <div class="grid grid-cols-1 items-start gap-12 sm:grid-cols-2">
+      <div class="flex flex-col gap-8">
+        <Eyebrow>Where it begins</Eyebrow>
+        <Display>Coffee from the land of a thousand hills</Display>
+      </div>
+      <div class="flex flex-col gap-6">
+        <p class="font-serif text-lede italic">
+          Rwanda rises ridge after ridge toward the volcanoes of the west. High on those slopes, in dark volcanic soil,
+          coffee ripens slowly — and slow is where flavour is made.
+        </p>
+        <p class="text-ink-muted">
+          The cool air of altitude holds the cherry on the branch for longer, building sweetness and a bright, clean
+          acidity. Here the heritage Bourbon variety has found its home, and Rwandan coffee is now counted among the most
+          admired specialty coffees in the world.
+        </p>
+        <TextLink href="/story">Read our story</TextLink>
+      </div>
+    </div>
+  </Section>
+
+  <PhotoSlot label="Terraced hills at the estate, misty morning, full bleed (caferwa.coffee/estates hero)" class="h-90 md:h-140" />
+
+  <!-- From hillside to cup -->
+  <Section>
+    <SectionHead
+      eyebrow="From hillside to cup"
+      title="Kept close to the source"
+      link={{ href: '/story#seed-to-cup', label: 'Follow the journey' }}
+    >
+      <p class="text-body-lg text-ink-muted">
+        Most coffee spends months, even years, as green beans in distant warehouses. Ours stays near the hills where it
+        grew — washed beside the estate, roasted in Kigali, and sent out only when it is ready to drink.
+      </p>
+    </SectionHead>
+    <Steps steps={journey} />
+  </Section>
+
+  <!-- Estates -->
+  <Section theme="noir">
+    <SectionHead
+      eyebrow="Our estates"
+      title="Two estates, two cups"
+      roast
+      link={{ href: '/estates', label: 'Explore the estates' }}
+    />
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+      <FeatureTile
+        href="/estates#buliza"
+        eyebrow="Northern Province"
+        title="Buliza"
+        text="Sweet, jammy, citrus — about an hour from Kigali."
+        cta="Discover Buliza"
+        photo="Buliza estate (caferwa.coffee/estates)"
+      />
+      <FeatureTile
+        href="/estates#cyebumba"
+        eyebrow="Western Province"
+        title="Cyebumba"
+        text="Floral, nutty and juicy, with a smooth, balanced body."
+        cta="Discover Cyebumba"
+        photo="Cyebumba estate (caferwa.coffee/estates)"
+      />
+    </div>
+  </Section>
+
+  <Section space="loose" containerClass="flex justify-center">
+    <PullQuote
+      quote="Amongst the top 1% of the world's highest quality single estate coffees."
+      cite="Kivu Noir Red Bourbon arabica"
+    />
+  </Section>
+
+  <!-- Shop -->
+  <Section raised>
+    <SectionHead eyebrow="Shop" title="The world's freshest coffee" link={{ href: '/shop', label: 'Shop all' }} />
+    <div class="grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 md:grid-cols-4">
+      {featuredProducts.map((product) => <ProductCard href="/shop" {...product} />)}
+    </div>
+  </Section>
+
+  <!-- Café -->
+  <Split>
+    <Cover slot="media" src={cafeInterior} alt="Inside the Kivu Noir café, black walls and warm light" />
+    <Eyebrow roast>Our café</Eyebrow>
+    <Display>Two cafés in Kigali, one menu</Display>
+    <p class="text-body-lg text-ink-muted">
+      Taste the estates where they are roasted — from a pour over to an African latte, at Kimihurura and at Norrsken.
+    </p>
+    <Rows
+      class="max-w-120"
+      rows={[
+        { label: 'Kimihurura', value: 'Mon–Fri 8am–8pm · Sat 9am–5pm' },
+        { label: 'Norrsken', value: 'Mon–Fri 8am–6pm · Sat 9am–5pm' },
+      ]}
+    />
+    <div class="flex flex-wrap items-center gap-6">
+      <Button href="/cafe">See the menu</Button>
+      <TextLink href="/cafe#branches" class="self-center">Find a café</TextLink>
+    </div>
+  </Split>
+
+  <!-- Export -->
+  <Section>
+    <div class="grid grid-cols-1 items-center gap-12 sm:grid-cols-2">
+      <div class="flex flex-col gap-8">
+        <Eyebrow>Export &amp; trade</Eyebrow>
+        <Display>For roasters, importers and hospitality</Display>
+        <p class="text-body-lg text-ink-muted">
+          Single estate lots from the Rwandan highlands, prepared for export in Kigali — green, roasted or under your own
+          label, and traceable to the hillside they came from.
+        </p>
+        <div class="flex flex-wrap items-center gap-6">
+          <Button href="/export">Request samples</Button>
+          <TextLink href="/export#services" class="self-center">Our services</TextLink>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+        {
+          trade.map((item) => (
+            <Card>
+              <Eyebrow>{item.title}</Eyebrow>
+              <p>{item.text}</p>
+            </Card>
+          ))
+        }
+      </div>
+    </div>
+  </Section>
+
+  <!-- Visit -->
+  <Split flip>
+    <PhotoSlot slot="media" label="Buliza estate tour (rw.kivunoir.coffee/collections/book-a-tour)" class="absolute inset-0" />
+    <Eyebrow roast>Visit</Eyebrow>
+    <Display>Walk the rows where your coffee grows</Display>
+    <p class="text-body-lg text-ink-muted">
+      Spend a day at Buliza, an hour from Kigali, or travel west to Cyebumba. Or stay in the city for a guided tasting.
+    </p>
+    <div><Button variant="secondary" href="/visit">Book a visit</Button></div>
+  </Split>
+
+  <!-- Press -->
+  <Section space="tight">
+    <div class="flex flex-wrap items-center justify-between gap-8">
+      <Eyebrow>As seen on</Eyebrow>
+      <ul class="flex flex-wrap items-baseline gap-12 font-serif text-mark text-ink-muted italic">
+        <li>CNN</li>
+        <li>CNBC</li>
+        <li>Forbes</li>
+      </ul>
+      <TextLink href="/story#press" class="self-center">Read the features</TextLink>
+    </div>
+  </Section>
+</BaseLayout>

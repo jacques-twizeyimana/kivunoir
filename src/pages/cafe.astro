@@ -1,0 +1,202 @@
+---
+import cafeInterior from '../assets/images/cafe-interior.jpg';
+import lattePour from '../assets/images/latte-pour.jpg';
+import Breadcrumbs from '../components/ui/Breadcrumbs.astro';
+import Button from '../components/ui/Button.astro';
+import Cover from '../components/ui/Cover.astro';
+import Display from '../components/ui/Display.astro';
+import Eyebrow from '../components/ui/Eyebrow.astro';
+import Hero from '../components/ui/Hero.astro';
+import HeroActions from '../components/ui/HeroActions.astro';
+import PhotoSlot from '../components/ui/PhotoSlot.astro';
+import Rows from '../components/ui/Rows.astro';
+import Section from '../components/ui/Section.astro';
+import SectionHead from '../components/ui/SectionHead.astro';
+import Split from '../components/ui/Split.astro';
+import { cafeMenu, contact } from '../data/site';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const branches = [
+  {
+    number: 'Branch 01',
+    name: 'Kimihurura',
+    photo: 'Kimihurura café (rw.kivunoir.coffee/pages/our-cafe)',
+    hours: [
+      { label: 'Monday – Friday', value: '8am – 8pm' },
+      { label: 'Saturday', value: '9am – 5pm' },
+      { label: 'Sunday', value: '[hours]' },
+      { label: 'Address', value: '[street address], Kimihurura, Kigali' },
+    ],
+    directions: 'https://rw.kivunoir.coffee/pages/our-cafe',
+  },
+  {
+    number: 'Branch 02',
+    name: 'Norrsken',
+    photo: 'Norrsken café (rw.kivunoir.coffee/pages/our-cafe)',
+    hours: [
+      { label: 'Monday – Friday', value: '8am – 6pm' },
+      { label: 'Saturday', value: '9am – 5pm' },
+      { label: 'Sunday', value: '[hours]' },
+      { label: 'Address', value: 'Norrsken House, [street address], Kigali' },
+    ],
+    directions: 'https://goo.gl/maps/bGb2eWUdi4T2dbPq5',
+  },
+];
+
+const signatures = [
+  { name: 'African latte', price: 'RWF 8,000', image: lattePour, alt: 'An African latte being poured' },
+  { name: 'Pour over', price: 'RWF 5,000', photo: 'Pour over (kivunoir.rw menu)' },
+  { name: 'Affogato', price: 'RWF 12,000', photo: 'Affogato (rw.kivunoir.coffee/pages/our-cafe)' },
+  { name: 'Cherry cold brew', price: 'RWF 7,500', photo: 'Cherry cold brew (kivunoir.rw menu)' },
+];
+
+const [firstTab] = cafeMenu;
+---
+
+<BaseLayout
+  current="cafe"
+  title="Café · Kimihurura & Norrsken"
+  description="Two cafés in Kigali pouring Kivu Noir estate coffee — the same menu at Kimihurura and Norrsken."
+>
+  <Hero>
+    <Breadcrumbs current="Café" />
+    <Display as="h1" size="xl">Visit the café today</Display>
+    <p class="max-w-110 text-body-lg text-ink-muted">
+      Two cafés in Kigali pouring our own estate coffee — the same menu at Kimihurura and Norrsken.
+    </p>
+    <HeroActions>
+      <Button variant="roast" href="#menu">See the menu</Button>
+      <Button variant="secondary" href="https://www.kivunoir.rw/reservation/make">Reserve a table</Button>
+    </HeroActions>
+    <Cover slot="media" src={cafeInterior} alt="The Kivu Noir café interior" loading="eager" />
+  </Hero>
+
+  <!-- Branches -->
+  <Section id="branches">
+    <SectionHead eyebrow="Our cafés" title="Two addresses in Kigali" />
+    <div class="grid grid-cols-1 gap-x-12 gap-y-16 sm:grid-cols-2">
+      {
+        branches.map((branch) => (
+          <article class="flex flex-col gap-6">
+            <PhotoSlot label={branch.photo} class="aspect-4/3" />
+            <Eyebrow roast>{branch.number}</Eyebrow>
+            <Display as="h3" size="heading">
+              {branch.name}
+            </Display>
+            <Rows rows={branch.hours} muted="label" />
+            <div>
+              <Button variant="secondary" size="sm" href={branch.directions}>
+                Directions
+              </Button>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </Section>
+
+  <!-- Menu -->
+  <Section theme="noir" id="menu">
+    <SectionHead
+      eyebrow="The menu"
+      title="One menu, both cafés"
+      roast
+      link={{ href: 'https://www.kivunoir.rw/menu/cafe', label: 'Full menu with photos' }}
+    >
+      <p class="text-body-lg text-ink-muted">
+        Every coffee is made with our own estate beans, roasted in Kigali. Prices in Rwandan francs.
+      </p>
+    </SectionHead>
+    <div role="group" aria-label="Menu sections" class="mb-12 flex flex-wrap gap-x-8 border-b border-line">
+      {
+        cafeMenu.map((section) => (
+          <button
+            type="button"
+            data-menu-tab={section.id}
+            aria-pressed={section.id === firstTab.id ? 'true' : 'false'}
+            aria-controls={`menu-${section.id}`}
+            class="-mb-px cursor-pointer border-b-2 border-transparent py-3 text-nav text-ink-muted uppercase transition-colors duration-200 hover:text-ink aria-pressed:border-roast aria-pressed:text-ink"
+          >
+            {section.label} <span class="text-ink-muted">{section.items.length}</span>
+          </button>
+        ))
+      }
+    </div>
+    {
+      cafeMenu.map((section) => (
+        <ul
+          id={`menu-${section.id}`}
+          data-menu-panel={section.id}
+          hidden={section.id !== firstTab.id}
+          aria-label={section.label}
+          class="grid grid-cols-1 gap-x-16 md:grid-cols-2"
+        >
+          {section.items.map(([name, price]) => (
+            <li class="flex items-baseline justify-between gap-4 border-b border-line py-4">
+              <span class="text-menu">{name}</span>
+              <span class="text-row whitespace-nowrap text-ink-muted tabular-nums">RWF {price}</span>
+            </li>
+          ))}
+        </ul>
+      ))
+    }
+    <p class="mt-12 text-caption text-ink-muted">
+      Pastries and food are served at both cafés — ask at the counter. Allergen information is available on request.
+    </p>
+  </Section>
+
+  <!-- Signatures -->
+  <Section>
+    <SectionHead eyebrow="From the bar" title="Worth the trip" size="heading" />
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-4">
+      {
+        signatures.map((item) => (
+          <figure class="flex flex-col gap-3">
+            {item.image ? (
+              <div class="relative aspect-4/5 overflow-hidden bg-noir-900">
+                <Cover src={item.image} alt={item.alt} sizes="(min-width: 900px) 25vw, (min-width: 600px) 50vw, 100vw" />
+              </div>
+            ) : (
+              <PhotoSlot label={item.photo ?? item.name} class="aspect-4/5" />
+            )}
+            <figcaption class="flex items-baseline justify-between gap-4">
+              <span class="text-title-sm">{item.name}</span>
+              <span class="whitespace-nowrap text-ink-muted tabular-nums">{item.price}</span>
+            </figcaption>
+          </figure>
+        ))
+      }
+    </div>
+  </Section>
+
+  <!-- Private events -->
+  <Split>
+    <PhotoSlot slot="media" label="Café opening day / community (rw.kivunoir.coffee/pages/our-cafe)" class="absolute inset-0" />
+    <Eyebrow roast>Private events</Eyebrow>
+    <Display>Host your evening with us</Display>
+    <p class="text-body-lg text-ink-muted">Book either café for launches, gatherings and private tastings.</p>
+    <Rows
+      class="max-w-120"
+      muted="label"
+      rows={[
+        { label: 'Call', value: contact.phoneRw },
+        { label: 'Write', value: contact.email },
+        { label: 'Follow', value: contact.instagram },
+      ]}
+    />
+    <div><Button href="https://www.kivunoir.rw/reservation/make">Make a reservation</Button></div>
+  </Split>
+</BaseLayout>
+
+<script>
+  const tabs = document.querySelectorAll<HTMLButtonElement>('[data-menu-tab]');
+  const panels = document.querySelectorAll<HTMLElement>('[data-menu-panel]');
+
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const id = tab.dataset.menuTab;
+      tabs.forEach((t) => t.setAttribute('aria-pressed', String(t === tab)));
+      panels.forEach((panel) => (panel.hidden = panel.dataset.menuPanel !== id));
+    });
+  });
+</script>

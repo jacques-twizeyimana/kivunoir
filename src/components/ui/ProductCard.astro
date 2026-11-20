@@ -1,0 +1,57 @@
+---
+import type { ImageMetadata } from 'astro';
+import Cover from './Cover.astro';
+import PhotoSlot from './PhotoSlot.astro';
+import Tag from './Tag.astro';
+
+interface Props {
+  eyebrow: string;
+  name: string;
+  price: string;
+  desc?: string;
+  image?: ImageMetadata;
+  alt?: string;
+  photo?: string;
+  badge?: string;
+  /** Renders the whole card as a link (home page teaser). */
+  href?: string;
+  class?: string;
+  [key: string]: unknown;
+}
+
+const { eyebrow, name, price, desc, image, alt = '', photo = name, badge, href, class: className, ...rest } = Astro.props;
+const Tag_ = href ? 'a' : 'article';
+---
+
+<Tag_ href={href} class:list={['group flex flex-col text-ink', className]} {...rest}>
+  <div class="relative aspect-4/5 overflow-hidden bg-surface-raised">
+    {
+      image ? (
+        <Cover
+          src={image}
+          alt={alt}
+          sizes="(min-width: 900px) 25vw, (min-width: 600px) 50vw, 100vw"
+          class="transition-transform duration-600 ease-out group-hover:scale-103"
+        />
+      ) : (
+        <PhotoSlot label={photo} light class="absolute inset-0" />
+      )
+    }
+    {badge && <Tag class="absolute top-4 left-4">{badge}</Tag>}
+  </div>
+  <div class="flex flex-col gap-3 pt-6">
+    <p class="text-eyebrow text-ink-muted uppercase">{eyebrow}</p>
+    <h3 class="text-title-sm">{name}</h3>
+    {
+      desc ? (
+        <div class="flex items-baseline justify-between gap-4">
+          <span class="text-small text-ink-muted">{desc}</span>
+          <span class="whitespace-nowrap tabular-nums">{price}</span>
+        </div>
+      ) : (
+        <span class="whitespace-nowrap tabular-nums">{price}</span>
+      )
+    }
+    <slot />
+  </div>
+</Tag_>

@@ -1,0 +1,208 @@
+---
+import packagingTube from '../assets/images/packaging-tube.jpg';
+import Button from '../components/ui/Button.astro';
+import Cover from '../components/ui/Cover.astro';
+import Display from '../components/ui/Display.astro';
+import Eyebrow from '../components/ui/Eyebrow.astro';
+import PageHero from '../components/ui/PageHero.astro';
+import PhotoSlot from '../components/ui/PhotoSlot.astro';
+import PullQuote from '../components/ui/PullQuote.astro';
+import Rows from '../components/ui/Rows.astro';
+import Section from '../components/ui/Section.astro';
+import SectionHead from '../components/ui/SectionHead.astro';
+import Split from '../components/ui/Split.astro';
+import Steps from '../components/ui/Steps.astro';
+import { seedToCup } from '../data/site';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const gallery = [
+  { photo: 'Harvest at the estate', caption: 'Harvest at the estate' },
+  { photo: 'Drying beds at the washing station', caption: 'Drying under the equatorial sun' },
+  { photo: 'Roasting in Kigali', caption: 'Roasting in Kigali' },
+];
+---
+
+<BaseLayout
+  current="story"
+  title="Our story"
+  description="Rwanda rises ridge after ridge toward the volcanoes of the west. This is the story of Kivu Noir."
+>
+  <PageHero crumb="Our story" title="Born in the hills of Rwanda">
+    <p class="max-w-180 font-serif text-lede italic">
+      Rwanda rises ridge after ridge toward the volcanoes of the west. On those high slopes coffee grows slowly, and
+      slow is where flavour comes from. This is the story of ours.
+    </p>
+  </PageHero>
+
+  <PhotoSlot label="Rwandan hills at dawn over the estate, full bleed (caferwa.coffee/estates hero)" class="h-100 md:h-170" />
+
+  <!-- I · The land -->
+  <Section space="loose">
+    <div class="grid grid-cols-1 gap-12 sm:grid-cols-2">
+      <div class="flex flex-col gap-3">
+        <Eyebrow roast>I · The land</Eyebrow>
+        <Display>A thousand hills, and the volcanoes beyond</Display>
+      </div>
+      <div class="flex flex-col gap-6">
+        <p class="text-body-lg">
+          Rwanda is a country of mountains. Its coffee grows high above the valleys, in dark volcanic soil, under the
+          equatorial sun and a rhythm of rain and dry seasons.
+        </p>
+        <p class="text-ink-muted">
+          At that altitude the nights are cool and the cherries ripen slowly. The extra time on the branch is what gives
+          Rwandan coffee its depth: a honeyed sweetness, a bright and clean acidity, and layers of fruit and flowers that
+          unfold as the cup cools.
+        </p>
+      </div>
+    </div>
+  </Section>
+
+  <!-- II · The Bourbon -->
+  <Split>
+    <PhotoSlot slot="media" label="Ripe red Bourbon cherries on the branch, close up" class="absolute inset-0" />
+    <Eyebrow roast>II · The Bourbon</Eyebrow>
+    <Display>A heritage variety that found its home</Display>
+    <p class="text-body-lg text-ink-muted">
+      Nearly all of Rwanda's arabica is Bourbon — an old, delicate variety prized for its natural sweetness and clarity.
+      It asks more of the farmer and gives far more in the cup.
+    </p>
+    <p class="text-ink-muted">Kivu Noir is Red Bourbon, grown on our own estates and nowhere else.</p>
+  </Split>
+
+  <!-- III · The hands -->
+  <Section space="loose">
+    <div class="grid grid-cols-1 items-center gap-12 sm:grid-cols-2">
+      <PhotoSlot label="Hand-picking cherries / sorting at the washing station" light class="aspect-4/5" />
+      <div class="flex flex-col gap-8">
+        <Eyebrow roast>III · The hands</Eyebrow>
+        <Display>Picked by hand, sorted by eye</Display>
+        <p class="text-body-lg">
+          Rwandan coffee is a hand-made coffee. Cherries are picked one by one as they ripen and carried down the
+          hillside to the washing station.
+        </p>
+        <p class="text-ink-muted">
+          Every step after that is about patience: washing, sorting by hand, drying slowly under the sun. It is the care
+          of the people on these hills that has earned Rwanda its place among the world's finest specialty origins.
+        </p>
+      </div>
+    </div>
+  </Section>
+
+  <!-- IV · Kivu Noir -->
+  <Section theme="noir" space="loose">
+    <div class="grid grid-cols-1 gap-12 sm:grid-cols-2">
+      <div class="flex flex-col gap-3">
+        <Eyebrow roast>IV · Kivu Noir</Eyebrow>
+        <Display>Two estates, and a promise of freshness</Display>
+      </div>
+      <div class="flex flex-col gap-6">
+        <p class="text-body-lg">
+          Kivu Noir comes from two estates: Buliza, in the northern hills an hour from Kigali, and Cyebumba, high in the
+          west. Two climates, two characters — one jammy and bright, the other floral and smooth.
+        </p>
+        <p class="text-ink-muted">
+          Most coffee leaves its origin green and waits in warehouses for months before anyone roasts it, losing much of
+          what made it special. We keep ours close to home. It is roasted in Kigali, sealed in our black tube, and on its
+          way to you while it still tastes of the hillside.
+        </p>
+        <div class="mt-2"><Button variant="secondary" href="/estates">Meet the estates</Button></div>
+      </div>
+    </div>
+  </Section>
+
+  <div data-theme="noir" class="relative aspect-video max-h-160 w-full overflow-hidden">
+    <Cover src={packagingTube} alt="The black Kivu Noir tube and lid" sizes="100vw" />
+  </div>
+
+  <!-- Seed to cup -->
+  <Section id="seed-to-cup">
+    <SectionHead eyebrow="From hillside to cup" title="Every step, close to the source">
+      <p class="text-body-lg text-ink-muted">
+        For partners and the curious: the path each lot takes from a seedling on our estates to the cup in your hand.
+        Every bag can be traced back along it.
+      </p>
+    </SectionHead>
+    <Steps steps={seedToCup} />
+  </Section>
+
+  <!-- Gallery -->
+  <Section raised>
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
+      {
+        gallery.map((item) => (
+          <figure class="flex flex-col gap-3">
+            <PhotoSlot label={item.photo} class="aspect-4/5" />
+            <figcaption class="text-caption text-ink-muted">{item.caption}</figcaption>
+          </figure>
+        ))
+      }
+    </div>
+  </Section>
+
+  <!-- Single estate -->
+  <Section>
+    <div class="grid grid-cols-1 items-center gap-12 sm:grid-cols-2">
+      <div class="flex flex-col gap-8">
+        <Eyebrow>Single estate</Eyebrow>
+        <Display size="heading">Not just a country. One hillside.</Display>
+        <p class="text-ink-muted">
+          Single origin can mean a whole country or region. Single estate means one specific, small piece of land — so
+          the cup carries the character of a single place, and only the largest, most even beans are chosen for it.
+        </p>
+      </div>
+      <PullQuote
+        quote="Amongst the top 1% of the world's highest quality single estate coffees."
+        cite="Kivu Noir Red Bourbon arabica"
+      />
+    </div>
+  </Section>
+
+  <!-- Community -->
+  <Split flip>
+    <PhotoSlot slot="media" label="Nursery school graduates (rw.kivunoir.coffee/pages/our-story)" class="absolute inset-0" />
+    <Eyebrow roast>Our community</Eyebrow>
+    <Display>The next generation on the hills</Display>
+    <p class="text-body-lg text-ink-muted">
+      For a decade we have funded free schooling for the children of the farmers who grow our coffee, and every year we
+      celebrate our nursery school graduates with them.
+    </p>
+    <p class="text-caption text-ink-muted">
+      Our roots in Rwandan coffee go back to 1995, when our parent company Caferwa began helping to rebuild the country's
+      coffee industry.
+    </p>
+  </Split>
+
+  <!-- Press & certifications -->
+  <Section id="press">
+    <div class="grid grid-cols-1 gap-12 sm:grid-cols-2">
+      <div class="flex flex-col gap-6">
+        <Eyebrow>In the press</Eyebrow>
+        <Rows
+          rows={[
+            { label: 'Forbes', value: 'Read', href: 'https://rw.kivunoir.coffee/pages/our-story' },
+            { label: 'CNN', value: 'Watch', href: 'https://rw.kivunoir.coffee/' },
+            { label: 'CNBC', value: 'Watch', href: 'https://rw.kivunoir.coffee/' },
+          ]}
+        />
+      </div>
+      <div class="flex flex-col gap-6">
+        <Eyebrow>Certified</Eyebrow>
+        <Rows
+          rows={[
+            { label: 'HACCP', value: 'Food safety at every stage' },
+            { label: 'Rwanda FDA', value: 'National food safety compliance' },
+            { label: 'S-Mark', value: 'Rwanda Standards Board' },
+          ]}
+        />
+      </div>
+    </div>
+  </Section>
+
+  <Section theme="noir" containerClass="flex flex-wrap items-center justify-between gap-6">
+    <Display size="heading">Come and see where it grows</Display>
+    <div class="flex flex-wrap items-center gap-6">
+      <Button variant="roast" href="/visit">Book an estate visit</Button>
+      <Button variant="secondary" href="/shop">Taste it at home</Button>
+    </div>
+  </Section>
+</BaseLayout>

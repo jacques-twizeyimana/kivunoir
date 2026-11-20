@@ -1,0 +1,48 @@
+---
+import Container from './Container.astro';
+
+interface Props {
+  theme?: 'blanc' | 'noir';
+  raised?: boolean;
+  /** default 96px (64px below 900px) · tight 64px · loose 128px · none */
+  space?: 'default' | 'tight' | 'loose' | 'none';
+  /** Wrap the content in the site container. */
+  contained?: boolean;
+  id?: string;
+  class?: string;
+  containerClass?: string;
+}
+
+const {
+  theme,
+  raised = false,
+  space = 'default',
+  contained = true,
+  id,
+  class: className,
+  containerClass,
+} = Astro.props;
+
+const spacing = {
+  default: 'py-16 md:py-24',
+  tight: 'py-16',
+  loose: 'py-24 md:py-32',
+  none: '',
+}[space];
+---
+
+<section
+  id={id}
+  data-theme={theme}
+  class:list={['text-ink', raised ? 'bg-surface-raised' : 'bg-surface', spacing, className]}
+>
+  {
+    contained ? (
+      <Container class={containerClass}>
+        <slot />
+      </Container>
+    ) : (
+      <slot />
+    )
+  }
+</section>

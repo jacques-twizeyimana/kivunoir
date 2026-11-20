@@ -1,0 +1,150 @@
+---
+import Breadcrumbs from '../components/ui/Breadcrumbs.astro';
+import Button from '../components/ui/Button.astro';
+import Card from '../components/ui/Card.astro';
+import CardTitle from '../components/ui/CardTitle.astro';
+import Display from '../components/ui/Display.astro';
+import Eyebrow from '../components/ui/Eyebrow.astro';
+import Notice from '../components/ui/Notice.astro';
+import ProductCard from '../components/ui/ProductCard.astro';
+import Section from '../components/ui/Section.astro';
+import SectionHead from '../components/ui/SectionHead.astro';
+import Tag from '../components/ui/Tag.astro';
+import TextLink from '../components/ui/TextLink.astro';
+import { productFilters, products } from '../data/site';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const roasts = [
+  { name: 'Medium', text: 'For filter, pour over and French press. Whole bean or ground.' },
+  { name: 'Espresso', text: 'Roasted for the espresso machine and milk drinks. Whole bean or filter ground.' },
+  { name: 'Dark', text: 'The deepest of our roasts. Whole bean.' },
+];
+---
+
+<BaseLayout
+  current="shop"
+  title="Shop · Coffee & souvenirs"
+  description="Red Bourbon arabica, roasted in Kigali within weeks of harvest. Free daily delivery in Rwanda."
+>
+  <Section class="pb-12! md:pb-12!">
+    <div class="flex flex-wrap items-end justify-between gap-8">
+      <div class="flex max-w-measure flex-col gap-4">
+        <Breadcrumbs current="Shop" />
+        <Display as="h1">Shop</Display>
+        <p class="text-body-lg text-ink-muted">
+          Red Bourbon arabica, roasted in Kigali within weeks of harvest. Free daily delivery in Rwanda.
+        </p>
+      </div>
+      <div class="flex flex-wrap gap-2">
+        <Tag outline>Free delivery in Rwanda</Tag>
+        <Tag outline>Ships abroad by air</Tag>
+      </div>
+    </div>
+  </Section>
+
+  <Section class="pt-0!">
+    <div role="group" aria-label="Filter products" class="mb-12 flex flex-wrap gap-x-8 border-b border-line">
+      {
+        productFilters.map((filter, index) => (
+          <button
+            type="button"
+            data-filter={filter.id}
+            aria-pressed={index === 0 ? 'true' : 'false'}
+            class="-mb-px cursor-pointer border-b-2 border-transparent py-3 text-nav text-ink-muted uppercase transition-colors duration-200 hover:text-ink aria-pressed:border-roast aria-pressed:text-ink"
+          >
+            {filter.label}
+          </button>
+        ))
+      }
+    </div>
+    <Notice class="mb-8" data-cart-notice>Added to your cart.</Notice>
+    <div class="grid grid-cols-1 gap-x-6 gap-y-16 sm:grid-cols-2 md:grid-cols-4">
+      {
+        products.map((product) => (
+          <ProductCard data-category={product.cat} {...product}>
+            {product.soldOut ? (
+              <Button variant="disabled" size="sm" block class="mt-2">
+                Sold out
+              </Button>
+            ) : product.cat === 'experience' ? (
+              <Button variant="secondary" size="sm" block class="mt-2" href="/visit">
+                {product.cta ?? 'Book'}
+              </Button>
+            ) : (
+              <Button
+                variant="secondary"
+                size="sm"
+                block
+                class="mt-2"
+                data-add-to-cart={`${product.name} · ${product.desc}`}
+              >
+                {product.cta ?? 'Add to cart'}
+              </Button>
+            )}
+          </ProductCard>
+        ))
+      }
+    </div>
+  </Section>
+
+  <!-- Roast guide -->
+  <Section theme="noir">
+    <SectionHead eyebrow="Choosing a roast" title="Three roasts, one bean" roast />
+    <div class="grid grid-cols-1 gap-12 sm:grid-cols-2 md:grid-cols-3">
+      {
+        roasts.map((roast) => (
+          <div class="flex flex-col gap-3 border-t-2 border-line-strong pt-6">
+            <p class="text-title">{roast.name}</p>
+            <p class="text-ink-muted">{roast.text}</p>
+          </div>
+        ))
+      }
+    </div>
+  </Section>
+
+  <!-- Gifting & trade -->
+  <Section>
+    <div class="grid grid-cols-1 gap-12 sm:grid-cols-2">
+      <Card>
+        <Eyebrow>Corporate gifts</Eyebrow>
+        <CardTitle>Kivu Noir for your team or guests</CardTitle>
+        <p class="text-ink-muted">Coffee and souvenirs in quantity, for events, hotels and corporate gifting.</p>
+        <div class="mt-auto pt-4"><TextLink href="/contact#contact">Ask for a quote</TextLink></div>
+      </Card>
+      <Card>
+        <Eyebrow>Stock Kivu Noir</Eyebrow>
+        <CardTitle>Cafés, hotels and retailers</CardTitle>
+        <p class="text-ink-muted">Wholesale roasted coffee and trade pricing for partners in Rwanda and abroad.</p>
+        <div class="mt-auto pt-4"><TextLink href="/export">Trade and wholesale</TextLink></div>
+      </Card>
+    </div>
+  </Section>
+</BaseLayout>
+
+<script>
+  const filters = document.querySelectorAll<HTMLButtonElement>('[data-filter]');
+  const cards = document.querySelectorAll<HTMLElement>('[data-category]');
+  const notice = document.querySelector<HTMLElement>('[data-cart-notice]');
+  const cartCount = document.querySelector<HTMLElement>('[data-cart-count]');
+  let count = 0;
+
+  filters.forEach((filter) => {
+    filter.addEventListener('click', () => {
+      const id = filter.dataset.filter;
+      filters.forEach((f) => f.setAttribute('aria-pressed', String(f === filter)));
+      cards.forEach((card) => (card.hidden = id !== 'all' && card.dataset.category !== id));
+      if (notice) notice.hidden = true;
+    });
+  });
+
+  document.querySelectorAll<HTMLButtonElement>('[data-add-to-cart]').forEach((button) => {
+    button.addEventListener('click', () => {
+      count += 1;
+      if (cartCount) cartCount.textContent = String(count);
+      if (notice) {
+        notice.textContent = `Added to your cart: ${button.dataset.addToCart}.`;
+        notice.hidden = false;
+      }
+    });
+  });
+</script>
